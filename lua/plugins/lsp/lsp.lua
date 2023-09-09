@@ -9,7 +9,7 @@ return {
 				build = ":MasonUpdate",
 				dependencies = "williamboman/mason-lspconfig.nvim",
 			},
-			
+
 			"hrsh7th/nvim-cmp",
 			"hrsh7th/cmp-nvim-lsp",
 			"saadparwaiz1/cmp_luasnip",
@@ -23,12 +23,22 @@ return {
 		config = function()
 			local lsp = require("lsp-zero").preset({})
 
-			lsp.on_attach(function(client, bufnr)
+			lsp.on_attach(function(_, bufnr)
 				lsp.default_keymaps({ buffer = bufnr })
 			end)
 
 			lsp.ensure_installed({
 				"lua_ls"
+			})
+
+			lsp.configure("lua_ls", {
+				settings = {
+					Lua = {
+						diagnostics = {
+							globals = { "vim" },
+						}
+					}
+				}
 			})
 
 			lsp.set_sign_icons({
