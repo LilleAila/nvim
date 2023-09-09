@@ -4,7 +4,8 @@ local diagnostic = vim.diagnostic
 local cmd = vim.cmd
 
 opt.guifont = "JetBrainsMono Nerd Font:h12"
-
+opt.encoding = "UTF-8"
+opt.mousemoveevent = true
 opt.hidden = true
 g.code_action_menu_window_border = "single"
 opt.ch = 0
@@ -59,6 +60,8 @@ opt.shadafile = "NONE"
 opt.shadafile = ""
 opt.swapfile = false
 opt.shortmess:append("sI")
+opt.undofile = true
+opt.undolevels = 10000
 
 local builtins = {
 	"2html_plugin",
