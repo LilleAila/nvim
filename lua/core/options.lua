@@ -47,7 +47,8 @@ opt.softtabstop = 2
 opt.shiftwidth = 2
 opt.autoindent = true
 opt.smartindent = true
-opt.signcolumn = "number"
+-- opt.signcolumn = "number"
+opt.signcolumn = "yes"
 opt.fillchars:append("eob: ")
 opt.listchars:append("space: ")
 cmd("set lazyredraw")
