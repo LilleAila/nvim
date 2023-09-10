@@ -3,6 +3,8 @@ local g = vim.g
 local diagnostic = vim.diagnostic
 local cmd = vim.cmd
 
+g.mapleader = " "
+
 opt.guifont = "JetBrainsMono Nerd Font:h12"
 opt.encoding = "UTF-8"
 opt.mousemoveevent = true
