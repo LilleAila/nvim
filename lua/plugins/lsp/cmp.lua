@@ -11,9 +11,19 @@ return {
 		},
 		config = function()
 			local cmp = require("cmp")
-			local luasnip = require("luasnip")
+			local ls = require("luasnip")
+
+			-- ls.setup({
+			-- 	update_events = "TextChanged,TextChangedI",
+			-- })
+
+			ls.config.set_config({
+				update_events = "TextChanged,TextChangedI",
+				store_selection_keys = "<Tab>",
+			})
 
 			require("luasnip.loaders.from_vscode").lazy_load()
+			require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/LuaSnip/"}) -- Probably does not work on wandos
 
 			cmp.setup({
 				completion = {
@@ -21,7 +31,7 @@ return {
 				},
 				snippet = {
 					expand = function(args)
-						luasnip.lsp_expand(args.body)
+						ls.lsp_expand(args.body)
 					end,
 				},
 				mapping = cmp.mapping.preset.insert({
@@ -32,6 +42,22 @@ return {
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<C-e>"] = cmp.mapping.abort(),
 					["<CR>"] = cmp.mapping.confirm({ select = false }),
+
+					-- Keymaps for luasnip
+					["<Tab>"] = cmp.mapping(function(fallback)
+						if ls.expand_or_jumpable() then
+							ls.expand_or_jump()
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
+					["<S-Tab>"] = cmp.mapping(function(fallback)
+						if ls.jumpable(-1) then
+							ls.jump(-1)
+						else
+							fallback()
+						end
+					end, { "i", "s" })
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },

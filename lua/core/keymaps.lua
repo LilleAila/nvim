@@ -4,6 +4,8 @@ local function opts(description)
 	return { desc = description, noremap = true, silent = true }
 end
 
+-- local ls = require("luasnip")
+
 -- vim.g.mapleader = " "
 
 map("n", "<leader>qa", "<cmd>wqa!<cr>", opts("Save and quit all open files"))
@@ -45,6 +47,12 @@ wk.register({
 		r = { "<cmd>CellularAutomaton make_it_rain<cr>", "Make it rain" },
 		l = { "<cmd>CellularAutomaton game_of_life<cr>", "Game of life" },
 	},
+	-- s = {
+	-- 	name = "Snippets",
+	-- 	f = { function() ls.jump(1) end, "Jump forward in snippet" },
+	-- 	b = { function() ls.jump(-1) end, "Jump backward in snippet" },
+	-- 	c = { function() if ls.choice_active then ls.change_active_choice(1) end end, "Change active choice" }
+	-- }
 }, { prefix = "<leader>" })
 
 -- File
@@ -53,12 +61,27 @@ map({ "n", "i" }, "<C-z>", "<cmd>undo<cr>", opts("Undo"))
 map({ "n", "i" }, "<C-y>", "<cmd>redo<cr>", opts("Redo"))
 map({ "n", "i" }, "<CS-z>", "<cmd>redo<cr>", opts("redo"))
 
+-- -- Luasnip
+-- map("i", "<Tab>", function()
+-- 	if ls.expand_or_jumpable()
+-- 		then
+-- 			ls.expand_or_jump()
+-- 		else
+-- 			local key = vim.api.nvim_replace_termcodes("<Tab>", true, false, true)
+-- 			vim.api.nvim_feedkeys(key, "n", false)
+-- 		end
+-- 	end, opts("Expand or jump forward snippet"))
+--
+-- -- map({ "i", "s" }, "<Tab>", function() ls.jump(1) end, opts("Jump forward in snippet"))
+-- map({ "i", "s" }, "<S-Tab>", function() ls.jump(-1) end, opts("Jump backward in snippet"))
+-- -- map({ "i", "s" }, "<leader>sc", function() if ls.choice_active() then ls.change_active_choice(1) end end, opts("Change active choice"))
+
 -- Buffers Barbar
-map("n", "<A-c>", "<cmd>BufferClose<cr>", opts("Close buffer"))
-map("n", "<A-p>", "<cmd>BufferPin<cr>", opts("Pin buffer"))
+map("n", "<M-c>", "<cmd>BufferClose<cr>", opts("Close buffer"))
+map("n", "<M-p>", "<cmd>BufferPin<cr>", opts("Pin buffer"))
 map("n", "<C-p>", "<cmd>BufferPick<cr>", opts("Pick buffer"))
-map("n", "<A-,>", "<cmd>BufferPrevious<cr>", opts("Go to previous buffer"))
-map("n", "<A-.>", "<cmd>BufferNext<cr>", opts("Go to next buffer"))
+map("n", "<M-,>", "<cmd>BufferPrevious<cr>", opts("Go to previous buffer"))
+map("n", "<M-.>", "<cmd>BufferNext<cr>", opts("Go to next buffer"))
 map("n", "<C-,>", "<cmd>BufferMovePrevious<cr>", opts("Move buffer right"))
 map("n", "<C-.>", "<cmd>BufferMoveNext<cr>", opts("Move buffer left"))
 

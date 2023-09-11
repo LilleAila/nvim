@@ -37,15 +37,17 @@ return {
 					l = {
 						name = "LSP",
 						r = { "<cmd>Telescope lsp_references<cr>", "Show references" },
+						c = { vim.lsp.buf.declaration, "Go to declaration" },
 						d = { "<cmd>Telescope lsp_definitions<cr>", "Show definitions" },
 						i = { "<cmd>Telescope lsp_implementations<cr>", "Show implementations" },
 						t = { "<cmd>Telescope lsp_type_definitions<cr>", "Show type definitions" },
-						-- R = { vim.lsp.buf.rename, "Smart rename" },
+						a = { vim.lsp.buf.code_action, "See available code actions" },
+						R = { vim.lsp.buf.rename, "Smart rename" },
 						D = { "<cmd>Telescope diagnostics bufnr=0<cr>", "Show buffer diagnostics" },
-						-- l = { vim.diagnostics.open_float, "Show line diagnostics" },
-						-- p = { vim.diagnostic.goto_prev, "Go to previous diagnostic" },
-						-- n = { vim.diagnostic.goto_next, "Go to next diagnostic" },
-						-- K = { vim.lsp.buf.hover, "Show documentation for what is under cursor" },
+						l = { vim.diagnostic.open_float, "Show line diagnostics" },
+						p = { vim.diagnostic.goto_prev, "Go to previous diagnostic" },
+						n = { vim.diagnostic.goto_next, "Go to next diagnostic" },
+						K = { vim.lsp.buf.hover, "Show documentation at cursor" },
 						S = { "<cmd>LspRestart<cr>", "Restart LSP" },
 						I = { "<cmd>LspInfo<cr>", "LSP info" },
 					},
@@ -129,6 +131,12 @@ return {
 					})
 					on_attach(_, bufnr)
 				end,
+				settings = {
+					language = "en",
+					-- dictionary = {
+					-- 	"en-US" == { "oppg", "oppgaver" }
+					-- }
+				}
 			})
 		end,
 	}

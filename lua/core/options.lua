@@ -4,6 +4,7 @@ local diagnostic = vim.diagnostic
 local cmd = vim.cmd
 
 g.mapleader = " "
+g.tex_flavor = "latex"
 
 opt.guifont = "JetBrainsMono Nerd Font:h12"
 opt.encoding = "UTF-8"
@@ -11,9 +12,6 @@ opt.mousemoveevent = true
 opt.hidden = true
 g.code_action_menu_window_border = "single"
 opt.ch = 0
--- g.currentTheme = config.colorscheme
--- g.theme_cache = vim.fn.stdpath "data" .. "/colors/data"
--- g.statusStyle = config.statusstyle
 opt.pumheight = 10
 opt.winminwidth = 10
 opt.fileencoding = "utf-8"
