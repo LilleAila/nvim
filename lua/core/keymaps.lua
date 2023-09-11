@@ -28,18 +28,18 @@ wk.register({
 		e = { "<cmd>qa!<cr>", "Exit neovim without saving" },
 		s = { "<cmd>w<cr>", "Save file" },
 	},
-	l = {
+	m = {
 		name = "Misc",
 		l = { "<cmd>Lazy<cr>", "Open lazy" },
 		m = { "<cmd>Mason<cr>", "Open mason" },
 	},
-	k = {
-		name = "Knap LaTeX",
-		p = { function() require("knap").process_once() end, "Process LaTeX" },
-		c = { function() require("knap").close_viewer() end, "Close LaTeX viewer" },
-		a = { function() require("knap").toggle_autopreviewing() end, "Toggle LaTeX auto previewing" },
-		f = { function() require("knap").forward_jump() end, "LaTeX forward fump" }
-	},
+	-- k = {
+	-- 	name = "Knap LaTeX",
+	-- 	p = { function() require("knap").process_once() end, "Process LaTeX" },
+	-- 	c = { function() require("knap").close_viewer() end, "Close LaTeX viewer" },
+	-- 	a = { function() require("knap").toggle_autopreviewing() end, "Toggle LaTeX auto previewing" },
+	-- 	f = { function() require("knap").forward_jump() end, "LaTeX forward fump" }
+	-- },
 	c = {
 		name = "Cellular Automaton",
 		r = { "<cmd>CellularAutomaton make_it_rain<cr>", "Make it rain" },
