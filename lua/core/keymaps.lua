@@ -35,15 +35,8 @@ wk.register({
 		l = { "<cmd>Lazy<cr>", "Open lazy" },
 		m = { "<cmd>Mason<cr>", "Open mason" },
 	},
-	-- k = {
-	-- 	name = "Knap LaTeX",
-	-- 	p = { function() require("knap").process_once() end, "Process LaTeX" },
-	-- 	c = { function() require("knap").close_viewer() end, "Close LaTeX viewer" },
-	-- 	a = { function() require("knap").toggle_autopreviewing() end, "Toggle LaTeX auto previewing" },
-	-- 	f = { function() require("knap").forward_jump() end, "LaTeX forward fump" }
-	-- },
 	k = {
-		name = "LaTeX",
+		name = "LaTeX", -- TODO: Make this only work for .tex buffers
 		c = { "<cmd>VimtexCompile<cr>", "Toggle compiling" },
 		v = { "<cmd>VimtexView<cr>", "View output" },
 		s = { "<cmd>VimtexStop<cr>", "Stop compiling" },
@@ -51,19 +44,13 @@ wk.register({
 		S = { "<cmd>VimtexStatus<cr>", "Show status" },
 		i = { "<cmd>VimtexInfo<cr>", "Show info" },
 		C = { "<cmd>VimtexClean<cr>", "Clean files" },
-		-- S = { "<cmd>VimtexCompileSS", "Single compile" },
+		o = { "<cmd>VimtexCompileSS<cr>", "Compile once" },
 	},
 	c = {
 		name = "Cellular Automaton",
 		r = { "<cmd>CellularAutomaton make_it_rain<cr>", "Make it rain" },
 		l = { "<cmd>CellularAutomaton game_of_life<cr>", "Game of life" },
 	},
-	-- s = {
-	-- 	name = "Snippets",
-	-- 	f = { function() ls.jump(1) end, "Jump forward in snippet" },
-	-- 	b = { function() ls.jump(-1) end, "Jump backward in snippet" },
-	-- 	c = { function() if ls.choice_active then ls.change_active_choice(1) end end, "Change active choice" }
-	-- },
 }, { prefix = "<leader>" })
 
 -- File
@@ -72,20 +59,7 @@ map({ "n", "i" }, "<C-z>", "<cmd>undo<cr>", opts("Undo"))
 map({ "n", "i" }, "<C-y>", "<cmd>redo<cr>", opts("Redo"))
 map({ "n", "i" }, "<CS-z>", "<cmd>redo<cr>", opts("redo"))
 
--- -- Luasnip
--- map("i", "<Tab>", function()
--- 	if ls.expand_or_jumpable()
--- 		then
--- 			ls.expand_or_jump()
--- 		else
--- 			local key = vim.api.nvim_replace_termcodes("<Tab>", true, false, true)
--- 			vim.api.nvim_feedkeys(key, "n", false)
--- 		end
--- 	end, opts("Expand or jump forward snippet"))
---
--- -- map({ "i", "s" }, "<Tab>", function() ls.jump(1) end, opts("Jump forward in snippet"))
--- map({ "i", "s" }, "<S-Tab>", function() ls.jump(-1) end, opts("Jump backward in snippet"))
--- -- map({ "i", "s" }, "<leader>sc", function() if ls.choice_active() then ls.change_active_choice(1) end end, opts("Change active choice"))
+-- Luasnip is configured in lua/plugins/lsp/cmp.lua
 
 -- Buffers Barbar
 map("n", "<M-c>", "<cmd>BufferClose<cr>", opts("Close buffer"))
