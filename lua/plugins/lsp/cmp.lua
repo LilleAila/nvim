@@ -20,6 +20,7 @@ return {
 			ls.config.set_config({
 				update_events = "TextChanged,TextChangedI",
 				store_selection_keys = "<Tab>",
+				delete_check_events = "TextChanged",
 			})
 
 			require("luasnip.loaders.from_vscode").lazy_load()

@@ -17,7 +17,7 @@ return {
 			-- Tectonic is easier to install, but latexmk can continuously compile
 			g.vimtex_compiler_method = "latexmk" -- latexmk, tectonic
 			g.vimtex_view_enabled = 1
-			g.vimtex_view_method = "skim" -- zathura, skim, general
+			g.vimtex_view_method = "skim" -- zathura (linux), skim (macos), general (cross-platform)
 			g.vimtex_view_skim_activate = 1 -- Switch to skim on :VimtexView
 
 			-- local function TexFocusNvim()

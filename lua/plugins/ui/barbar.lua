@@ -60,7 +60,7 @@ return {
 					modified = { button = "" },
 					pinned = { button = "󰐃", filename = true },
 
-					preset = "powerline",
+					-- preset = "powerline",
 					separator_at_end = false,
 				},
 				sidebar_filetypes = {

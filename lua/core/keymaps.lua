@@ -32,6 +32,7 @@ wk.register({
 	},
 	m = {
 		name = "Misc",
+		c = { "<cmd>Themery<cr>", "Change colorscheme" },
 		l = { "<cmd>Lazy<cr>", "Open lazy" },
 		m = { "<cmd>Mason<cr>", "Open mason" },
 	},
@@ -60,6 +61,7 @@ map({ "n", "i" }, "<C-y>", "<cmd>redo<cr>", opts("Redo"))
 map({ "n", "i" }, "<CS-z>", "<cmd>redo<cr>", opts("redo"))
 
 -- Luasnip is configured in lua/plugins/lsp/cmp.lua
+-- map("i", "<esc>", "<cmd>LuaSnipUnlinkCurrent<cr>")
 
 -- Buffers Barbar
 map("n", "<M-c>", "<cmd>BufferClose<cr>", opts("Close buffer"))
