@@ -42,6 +42,17 @@ wk.register({
 	-- 	a = { function() require("knap").toggle_autopreviewing() end, "Toggle LaTeX auto previewing" },
 	-- 	f = { function() require("knap").forward_jump() end, "LaTeX forward fump" }
 	-- },
+	k = {
+		name = "LaTeX",
+		c = { "<cmd>VimtexCompile<cr>", "Toggle compiling" },
+		v = { "<cmd>VimtexView<cr>", "View output" },
+		s = { "<cmd>VimtexStop<cr>", "Stop compiling" },
+		e = { "<cmd>VimtexErrors<cr>", "Show errors" },
+		S = { "<cmd>VimtexStatus<cr>", "Show status" },
+		i = { "<cmd>VimtexInfo<cr>", "Show info" },
+		C = { "<cmd>VimtexClean<cr>", "Clean files" },
+		-- S = { "<cmd>VimtexCompileSS", "Single compile" },
+	},
 	c = {
 		name = "Cellular Automaton",
 		r = { "<cmd>CellularAutomaton make_it_rain<cr>", "Make it rain" },
@@ -52,7 +63,7 @@ wk.register({
 	-- 	f = { function() ls.jump(1) end, "Jump forward in snippet" },
 	-- 	b = { function() ls.jump(-1) end, "Jump backward in snippet" },
 	-- 	c = { function() if ls.choice_active then ls.change_active_choice(1) end end, "Change active choice" }
-	-- }
+	-- },
 }, { prefix = "<leader>" })
 
 -- File

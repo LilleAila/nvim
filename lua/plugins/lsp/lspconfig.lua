@@ -114,30 +114,85 @@ return {
 				},
 			})
 
-			lspconfig["ltex"].setup({
-				capabilities = capabilities,
-				on_attach = function(_, bufnr)
-					require("which-key").register({
-						k = {
-							name = "Knap LaTeX",
-							p = { function() require("knap").process_once() end, "Process LaTeX" },
-							c = { function() require("knap").close_viewer() end, "Close LaTeX viewer" },
-							a = { function() require("knap").toggle_autopreviewing() end, "Toggle LaTeX auto previewing" },
-							f = { function() require("knap").forward_jump() end, "LaTeX forward fump" }
-						},
-					}, {
-						prefix = "<leader>",
-						buffer = bufnr
-					})
-					on_attach(_, bufnr)
-				end,
-				settings = {
-					language = "en",
-					-- dictionary = {
-					-- 	"en-US" == { "oppg", "oppgaver" }
-					-- }
-				}
-			})
+			-- lspconfig["texlab"].setup({
+			-- 	capabilities = capabilities,
+			-- 	on_attach = function(_, bufnr)
+			-- 		require("which-key").register({
+			-- 			k = {
+			-- 				name = "Knap LaTeX",
+			-- 				p = { function() require("knap").process_once() end, "Process LaTeX" },
+			-- 				c = { function() require("knap").close_viewer() end, "Close LaTeX viewer" },
+			-- 				a = { function() require("knap").toggle_autopreviewing() end, "Toggle LaTeX auto previewing" },
+			-- 				f = { function() require("knap").forward_jump() end, "LaTeX forward fump" }
+			-- 			},
+			-- 		}, {
+			-- 			prefix = "<leader>",
+			-- 			buffer = bufnr
+			-- 		})
+			-- 		on_attach(_, bufnr)
+			-- 	end,
+			-- 	setting = {
+			-- 		build = {
+			-- 			onSave = true,
+			-- 			forwardSearchAfter = true,
+			-- 			executable = "tectonic",
+			-- 			args = {
+			-- 				"-X",
+			-- 				"compile",
+			-- 				"%f",
+			-- 				"--synctex",
+			-- 				"--keep-logs",
+			-- 				"--keep-intermediates"
+			-- 			}
+			-- 		},
+			-- 		texlab = {
+			-- 			forwardSearch = {
+			-- 				executable = "sioyek",
+			-- 				args = {
+			-- 					"--reuse-window",
+			-- 					"--execute-command", "toggle_synctex",
+			-- 					"--inverse-search",
+			-- 					[[/Users/olaisolsvik/.local/share/nvim/lazy/nvim-texlabconfig/nvim-texlabconfig -file %%%1 -line %%%2 -server]] .. vim.v.servername,
+			-- 					"--forward-search-file", "%f",
+			-- 					"--forward-search-line", "%l", "%p",
+			-- 				}
+			-- 			}
+			-- 		},
+			-- 	}
+			-- })
+
+		-- 	lspconfig["ltex"].setup({
+		-- 		capabilities = capabilities,
+		-- 		on_attach = function(_, bufnr)
+		-- 			require("which-key").register({
+		-- 				k = {
+		-- 					name = "Knap LaTeX",
+		-- 					p = { function() require("knap").process_once() end, "Process LaTeX" },
+		-- 					c = { function() require("knap").close_viewer() end, "Close LaTeX viewer" },
+		-- 					a = { function() require("knap").toggle_autopreviewing() end, "Toggle LaTeX auto previewing" },
+		-- 					f = { function() require("knap").forward_jump() end, "LaTeX forward fump" }
+		-- 				},
+		-- 			}, {
+		-- 				prefix = "<leader>",
+		-- 				buffer = bufnr
+		-- 			})
+		-- 			on_attach(_, bufnr)
+		-- 		end,
+		-- 		settings = {
+		-- 			language = "en-US",
+		-- 			-- dictionary = {
+		-- 			-- 	"en-US" == { "oppg", "oppgaver" }
+		-- 			-- }
+		-- 			disabledRules = {
+		-- 				["en-US"] = {
+		-- 					"MORFOLOGIK_RULE_EN_US",
+		-- 					"UPPERCASE_SENTENCE_START",
+		-- 					"ER",
+		-- 					"LIGATURES",
+		-- 				}
+		-- 			},
+		-- 		}
+		-- 	})
 		end,
 	}
 }
