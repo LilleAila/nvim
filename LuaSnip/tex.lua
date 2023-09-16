@@ -133,7 +133,7 @@ return {
 		), { condition = tex_utils.in_mathzone }),
 	s({ trig = "([%s])*", descr = "Multiplication sign", snippetType = "autosnippet", regTrig = true, wordTrig = false },
 		fmta(
-			[[<>\cdot]],
+			[[<>\cdot ]],
 			{ f( function(_, snip) return snip.captures[1] end ) }
 		),
 		-- { t([[\cdot]]) },
