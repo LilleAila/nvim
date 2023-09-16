@@ -102,23 +102,21 @@ return {
 			[[<>$ <> $]],
 			{ f( function(_, snip) return snip.captures[1] end ), i(1) }
 		), { condition = tex_utils.in_text_wsnl }),
-	s({ trig = "me", descr = "Math environment" },
+	s({ trig = "ml", descr = "Multiline Math", snippetType = "autosnippet", wordTrig = false },
 		fmta(
 			[[
-				\begin{equation}
+				\begin{gather*}
 					<>
-				\end{equation}
+				\end{gather*}
 			]],
 			{ i(1) }
 		), { condition = tex_utils.in_text_lnstart }),
-	s({ trig = "mlm", descr = "Multiline Math" },
+	s({ trig = "me", descr = "Unnumbered equation" },
 		fmta(
 			[[
-				\begin{equation}
-				\begin{matrix}
+				\begin{equation*}
 					<>
-				\end{matrix}
-				\end{equation}
+				\end{equation*}
 			]],
 			{ i(1) }
 		), { condition = tex_utils.in_text_lnstart }),
@@ -133,16 +131,19 @@ return {
 			[[\frac{<>}{<>}]],
 			{ i(1), i(2) }
 		), { condition = tex_utils.in_mathzone }),
-	s({ trig = "*", descr = "Multiplication sign", snippetType = "autosnippet", wordTrig = false },
-		{ t([[\cdot]]) },
+	s({ trig = "([%s])*", descr = "Multiplication sign", snippetType = "autosnippet", regTrig = true, wordTrig = false },
+		fmta(
+			[[<>\cdot]],
+			{ f( function(_, snip) return snip.captures[1] end ) }
+		),
+		-- { t([[\cdot]]) },
 		{ condition = tex_utils.in_mathzone }),
-	-- Non-automatic
-	s({ trig = "aa", descr = "Answer (Double underline)", snippetType = "autosnippet", wordTrig = false },
+	s({ trig = "([%s])aa", descr = "Answer (Double underline)", snippetType = "autosnippet", wordTrig = false },
 		fmta(
 			[[
-				\underline{\underline{<>}}
+				<>\underline{\underline{<>}}
 			]],
-			{ d(1, get_visual) }
+			{ f( function(_, snip) return snip.captures[1] end ), d(1, get_visual) }
 		), { condition = tex_utils.in_mathzone }),
 	s({ trig = "und", descr = "Underset text (below other text)", wordTrig = false },
 		fmta(
@@ -232,5 +233,5 @@ return {
 				\end{<>}
 			]],
 			{ i(1), i(2), rep(1) }
-		), { condition = line_begin }),
+		), { condition = tex_utils.in_text_lnstart }),
 }
