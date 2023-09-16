@@ -11,7 +11,7 @@ local t = ls.text_node
 
 return {
 	s(
-		{ trig = "hi", snippetType = "autosnippet" },
+		{ trig = "hi" },
 		{ t("Hello, World!") }
 	)
 }

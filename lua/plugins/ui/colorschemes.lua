@@ -27,7 +27,7 @@ return {
 			require("themery").setup({
 				-- themes = { "catppuccin", "ayu" },
 				themes = {
-					{ name = "Ayu mirage", colorscheme = "ayu-mirage" },
+					{ name = "Ayu mirage", colorscheme = "ayu-mirage", after = [[vim.cmd("hi NvimTreeLineNr guifg=white")]] },
 					{ name = "Ayu dark", colorscheme = "ayu-dark" },
 					{ name = "Catppuccin mocha", colorscheme = "catppuccin-mocha" },
 					{ name = "Catppuccin macchiato", colorscheme = "catppuccin-macchiato" },
@@ -35,7 +35,7 @@ return {
 					{ name = "Tokyonight storm", colorscheme = "tokyonight-storm" },
 					{ name = "Tokyonight night", colorscheme = "tokyonight-night" },
 					{ name = "Tokyonight moon", colorscheme = "tokyonight-moon" },
-					{ name = "Oxocarbon", colorscheme = "oxocarbon" },
+					{ name = "Oxocarbon", colorscheme = "oxocarbon", before = [[vim.opt.background = "dark"]] },
 					{ name = "Nightfly", colorscheme = "nightfly" },
 					{ name = "Moonfly", colorscheme = "moonfly" },
 					{ name = "Melange", colorscheme = "melange" },

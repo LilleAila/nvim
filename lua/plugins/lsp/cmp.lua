@@ -8,6 +8,7 @@ return {
 			"L3MON4D3/LuaSnip",
 			"saadparwaiz1/cmp_luasnip",
 			"rafamadriz/friendly-snippets",
+			"lervag/vimtex", -- VimTeX is used in snippet files
 		},
 		config = function()
 			local cmp = require("cmp")
@@ -21,10 +22,11 @@ return {
 				update_events = "TextChanged,TextChangedI",
 				store_selection_keys = "<Tab>",
 				delete_check_events = "TextChanged",
+				enable_autosnippets = true,
 			})
 
+			require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/LuaSnip/"}) -- Probably does not work on wandos becus path
 			require("luasnip.loaders.from_vscode").lazy_load()
-			require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/LuaSnip/"}) -- Probably does not work on wandos
 
 			cmp.setup({
 				completion = {
