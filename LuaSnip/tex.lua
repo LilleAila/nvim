@@ -58,6 +58,10 @@ end
 tex_utils.in_tikz_nlnstart = function(a, b, c) -- Also has to be whitespace in front
 	return tex_utils.in_tikz() and not line_begin(a, b, c) and not not string.match(a, "%s" .. b .. "$")
 end
+tex_utils.in_list_nlnstart = function(a, b, c)
+	return tex_utils.in_list() and not line_begin(a, b, c)
+end
+
 -- local nl_whitespace = function(line_to_cursor, matched_trigger, captures)
 -- 	local whitespaceEnding = not not string.match(line_to_cursor, "%s" .. matched_trigger .. "$")
 -- 	local lineStart = line_begin(line_to_cursor, matched_trigger, captures)
@@ -77,7 +81,7 @@ return {
 		fmta(
 			[[
 				\documentclass[11pt, oneside]{article}
-				\usepackage{mathtools, amssymb, amsthm, graphicx, enumitem, titlesec, tikz, lipsum}
+				\usepackage{mathtools, amssymb, amsthm, graphicx, enumitem, titlesec, tikz, microtype}
 				\usepackage[a4paper, margin=1in]{geometry}
 				\mathtoolsset{showonlyrefs}
 				\graphicspath{ {./images/} }
@@ -85,9 +89,10 @@ return {
 				\setlength{\parindent}{0pt}
 
 				\title{\vspace{-2cm}<>}
-				\date{<>.<>.<>}
+				\date{<>}
 				\author{<>}
 
+				\renewcommand{\labelenumi}{\alph{enumi}}
 				\titleformat*{\section}{\fontsize{12}{15}\selectfont}
 				\titleformat*{\subsection}{\fontsize{10}{12}\selectfont}
 				\pagestyle{empty}
@@ -99,7 +104,7 @@ return {
 
 				\end{document}
 			]],
-			{ i(1, "Title"), i(2, "Year"), i(3, "Month"), i(4, "Day"), i(5, "Author"), i(6) }
+			{ i(1, "Title"), i(2, "Date"), i(3, "Author"), i(4) }
 		), { condition = line_begin }),
 	-------------------
 	-- Math Snippets --
@@ -140,7 +145,7 @@ return {
 		), { condition = tex_utils.in_mathzone }),
 	s({ trig = "([%s])*", descr = "Multiplication sign", snippetType = "autosnippet", regTrig = true, wordTrig = false },
 		fmta(
-			[[<>\cdot ]],
+			[[<>\cdot]],
 			{ f( function(_, snip) return snip.captures[1] end ) }
 		),
 		-- { t([[\cdot]]) },
@@ -160,7 +165,7 @@ return {
 	----------
 	-- Text --
 	----------
-	s({ trig = "([%s])nl", deescr = "Newline", snippetType = "autosnippet", regTrig = true, wordTrig = false },
+	s({ trig = "([%s])ll", deescr = "Newline", snippetType = "autosnippet", regTrig = true, wordTrig = false },
 		fmta(
 			[[<>\\]],
 			{ f( function(_, snip) return snip.captures[1] end ) }
@@ -313,6 +318,24 @@ return {
 			[[<>\item <>]],
 			{ f( function(_, snip) return snip.captures[1] end ), i(1) }
 		), { condition = tex_utils.in_list_lnstart }),
+	s({ trig = "(%s)lm", descr = "List multiline math", snippetType = "autosnippet", wordTrig = false, regTrig = true },
+		fmta(
+			[[
+				<>
+					\begin{flalign*}
+						& <> & <>
+					\end{flalign*}
+			]],
+			{ f( function(_, snip) return snip.captures[1] end ), i(1), i(2) }
+		), { condition = tex_utils.in_list_nlnstart }),
+	s({ trig = "(%s)nl", descr = "List math line", snippetType = "autosnippet", wordTrig = false, regTrig = true },
+		fmta(
+			[[
+				<>\\[5pt]
+				& <> &
+			]],
+			{ f( function(_, snip) return snip.captures[1] end ), i(1) }
+		), { condition = tex_utils.in_list_nlnstart }),
 	-----------
 	-- Other --
 	-----------

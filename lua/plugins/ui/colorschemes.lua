@@ -10,11 +10,12 @@ return {
 	"AlexvZyl/nordic.nvim",
 	"shaunsingh/nord.nvim",
 	"Mofiqul/vscode.nvim",
+	"projekt0n/github-nvim-theme",
 	{
 		"navarasu/onedark.nvim",
 		config = function()
 			require("onedark").setup({
-				-- toggle_style_key = "<leader>od",
+				-- toggle_style_key = "<leader>od", -- This does not work well with multiple themes installed
 				style = "deep"
 			})
 		end,
@@ -44,6 +45,9 @@ return {
 					{ name = "Nord", colorscheme = "nord" },
 					{ name = "VSCode", colorscheme = "vscode" },
 					{ name = "Onedark", colorscheme = "onedark" },
+					{ name = "Github dark", colorscheme = "github_dark" },
+					{ name = "Github dark dimmed", colorscheme = "github_dark_dimmed" },
+					{ name = "Github dark high contrast", colorscheme = "github_dark_high_contrast" },
 				},
 				themeConfigFile = "~/.config/nvim/lua/core/theme.lua",
 				livePreview = true,

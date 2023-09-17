@@ -23,7 +23,7 @@ local undo_snippet = function()
 end
 
 local paste_img = function()
-	vim.ui.input({ prompt = "Image name (saved to .images/): " }, function(input) vim.fn.system({ "pngpaste", "./images/" .. input .. ".png" }) end)
+	vim.ui.input({ prompt = "Image name (saved to ./images/): " }, function(input) vim.fn.system({ "pngpaste", "./images/" .. input .. ".png" }) end)
 end
 
 local wk = require("which-key")
