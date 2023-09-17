@@ -1,6 +1,6 @@
 return {
 	{
-		"nvim-lualina/lualine.nvim",
+		"nvim-lualine/lualine.nvim",
 		dependencies = "catppuccin/nvim",
 		after = "catppuccin/nvim",
 		config = function()
