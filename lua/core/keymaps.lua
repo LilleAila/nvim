@@ -4,11 +4,27 @@ local function opts(description)
 	return { desc = description, noremap = true, silent = true }
 end
 
--- local ls = require("luasnip")
-
 -- vim.g.mapleader = " "
 
 map("n", "<leader>qa", "<cmd>wqa!<cr>", opts("Save and quit all open files"))
+
+local ls = require("luasnip")
+local undo_snippet = function()
+	local buf = vim.api.nvim_get_current_buf()
+	local snip = ls.session.current_nodes[buf].parent.snippet
+	local trig = snip.trigger
+	local reg = snip:get_buf_position()
+	vim.api.nvim_buf_set_text(
+		buf,
+		reg.from_position[1], reg.from_position[2],
+		reg.to_position[1], reg.to_position[2],
+		trig
+	)
+end
+
+local paste_img = function()
+	vim.ui.input({ prompt = "Image name (saved to .images/): " }, function(input) vim.fn.system({ "pngpaste", "./images/" .. input .. ".png" }) end)
+end
 
 local wk = require("which-key")
 wk.register({
@@ -33,6 +49,8 @@ wk.register({
 	},
 	m = {
 		name = "Misc",
+		u = { undo_snippet, "Undo snippet completion" },
+		p = { paste_img, "Paste image from clipboard" },
 		c = { "<cmd>Themery<cr>", "Change colorscheme" },
 		l = { "<cmd>Lazy<cr>", "Open lazy" },
 		m = { "<cmd>Mason<cr>", "Open mason" },

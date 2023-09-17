@@ -40,7 +40,7 @@ tex_utils.in_tikz = function()  -- TikZ picture environment detection
     return tex_utils.in_env("tikzpicture")
 end
 tex_utils.in_list = function()
-	return tex_utils.in_end("enumerate")
+	return tex_utils.in_env("enumerate")
 end
 -------------------------
 tex_utils.in_text_wsnl = function(a, b, c) -- wsnl stands for whitespace / newline
@@ -51,6 +51,12 @@ tex_utils.in_text_lnstart = function(a, b, c)
 end
 tex_utils.in_list_lnstart = function(a, b, c)
 	return tex_utils.in_list() and line_begin(a, b, c)
+end
+tex_utils.in_tikz_lnstart = function(a, b, c)
+	return tex_utils.in_tikz() and line_begin(a, b, c)
+end
+tex_utils.in_tikz_nlnstart = function(a, b, c) -- Also has to be whitespace in front
+	return tex_utils.in_tikz() and not line_begin(a, b, c) and not not string.match(a, "%s" .. b .. "$")
 end
 -- local nl_whitespace = function(line_to_cursor, matched_trigger, captures)
 -- 	local whitespaceEnding = not not string.match(line_to_cursor, "%s" .. matched_trigger .. "$")
@@ -71,11 +77,12 @@ return {
 		fmta(
 			[[
 				\documentclass[11pt, oneside]{article}
-				\usepackage{mathtools, amssymb, amsthm, graphicx, enumitem, titlesec, lipsum}
+				\usepackage{mathtools, amssymb, amsthm, graphicx, enumitem, titlesec, tikz, lipsum}
 				\usepackage[a4paper, margin=1in]{geometry}
 				\mathtoolsset{showonlyrefs}
 				\graphicspath{ {./images/} }
 				\usepackage[parfill]{parskip}
+				\setlength{\parindent}{0pt}
 
 				\title{\vspace{-2cm}<>}
 				\date{<>.<>.<>}
@@ -138,7 +145,7 @@ return {
 		),
 		-- { t([[\cdot]]) },
 		{ condition = tex_utils.in_mathzone }),
-	s({ trig = "([%s])aa", descr = "Answer (Double underline)", snippetType = "autosnippet", wordTrig = false },
+	s({ trig = "([%s])aa", descr = "Answer (Double underline)", snippetType = "autosnippet", wordTrig = false, regTrig = true },
 		fmta(
 			[[
 				<>\underline{\underline{<>}}
@@ -172,33 +179,117 @@ return {
 			{ d(1, get_visual) }
 		), { condition = tex_utils.in_text }),
 	-- These sections use *, and will NOT be shown in the \tableofcontents
-	s({ trig = "sec", descr = "Section", wordTrig = false },
+	s({ trig = "sec", descr = "Section", wordTrig = false, snippetType = "autosnippet" },
 		fmta(
 			[[\section*{<>}]],
-			{ i("Section") }
-		), { condition = line_begin }),
-	s({ trig = "subs", descr = "Subsection", wordTrig = false },
+			{ i(1, "Section") }
+		), { condition = tex_utils.in_text_lnstart }),
+	s({ trig = "subs", descr = "Subsection", wordTrig = false, snippetType = "autosnippet" },
 		fmta(
 			[[\subsection*{<>}]],
 			{ i("Subsection") }
-		), { condition = line_begin }),
+		), { condition = tex_utils.in_text_lnstart }),
 	------------
 	-- Images --
 	------------
-	s({ trig = "([%s%{])img", descr = "Image", regTrig = true, wordTrig = false },
+	s({ trig = "img", descr = "Image", regTrig = true, wordTrig = false },
 		fmta( -- Can replace \textwidth with \linewidth -- All images are stored in ./images
 			[[<>\includegraphics[width=<>\textwidth]{<>}]],
-			{ f( function(_, snip) return snip.captures[1] end ), i(1, "1.0"), i(2) }
+			{ f( function(_, snip) return snip.captures[1] end ), i(1, "0.9"), i(2) }
 		), { condition = tex_utils.in_text }),
-	s({ trig = "([^%a])cc", descr = "Inline centered", regTrig = true, wordTrig = false },
+	s({ trig = "cc", descr = "Inline centered", snippetType = "autosnippet", wordTrig = false },
 		fmta(
 			[[<>\centerline{<>}]],
 			{ f( function(_, snip) return snip.captures[1] end ), d(1, get_visual) }
 		), { condition = tex_utils.in_text_lnstart }),
 	----------
+	-- Tikz --
+	----------
+	s({ trig = "tt", descr = "Tikz picture", snippetType = "autosnippet", wordTrig = false },
+		fmta(
+			[[
+				\begin{tikzpicture}
+					<>
+				\end{tikzpicture}
+			]],
+			{ i(1) }
+		), { condition = line_begin }),
+	---------- Generic
+	s({ trig = "dd", descr = "Generic draw", snippetType = "autosnippet", wordTrig = false },
+		fmta(
+			[[\draw[<>] ]],
+			{ i(1) }
+		), { condition = tex_utils.in_tikz_lnstart }),
+	---------- Lines
+	s({ trig = "dl", descr = "Draw lines", snippetType = "autosnippet", wordTrig = false },
+		fmta(
+			[[\draw[<>] (<>,<>)]],
+			{ i(1), i(2), i(3) }
+		), { condition = tex_utils.in_tikz_lnstart }),
+	s({ trig = "(%s)dl", descr = "Draw new coordinate", snippetType = "autosnippet", regTrig = true, wordTrig = false },
+		fmta(
+			[[<>-- (<>,<>)]],
+			{ f( function(_, snip) return snip.captures[1] end ), i(1), i(2) }
+		), { condition = tex_utils.in_tikz_nlnstart }),
+	s({ trig = "(%s)de", descr = "Cycle draw", snippetType = "autosnippet", regTrig = true, wordTrig = false },
+		fmta(
+			[[<>-- cycle;]],
+			{ f( function(_, snip) return snip.captures[1] end ) }
+		), { condition = tex_utils.in_tikz_nlnstart }),
+	---------- Shapes
+	s({ trig = "rr", descr = "Draw rectangle", snippetType = "autosnippet", wordTrig = false },
+		fmta(
+			[[(<>,<>) rectangle (<>,<>);]],
+			{ i(1), i(2), i(3), i(4) }
+		), { condition = tex_utils.in_tikz_nlnstart }),
+	s({ trig = "cc", descr = "Draw circle", snippetType = "autosnippet", wordTrig = false },
+		fmta(
+			[[(<>,<>) circle (<>cm);]],
+			{ i(1), i(2), i(3) }
+		), { condition = tex_utils.in_tikz_nlnstart }),
+	s({ trig = "ee", descr = "Draw ellipse", snippetType = "autosnippet", wordTrig = false },
+		fmta(
+			[[(<>,<>) ellipse (<>cm and <>cm);]],
+			{ i(1), i(2), i(3), i(4) }
+		), { condition = tex_utils.in_tikz_nlnstart }),
+	---------- Grids
+	s({ trig = "gg", descr = "Draw grid", snippetType = "autosnippet", wordTrig = false },
+		fmta(
+			[[\draw[step=<>cm,gray,very thin] (<>,<>) grid (<>,<>);]],
+			{ i(1, "1"), i(2, "Bottom"), i(3, "Left"), i(4, "Top"), i(5, "Right") }
+		), { condition = tex_utils.in_tikz_lnstart }),
+	s({ trig = "ff", descr = "Fill color", snippetType = "autosnippet", wordTrig = false },
+		fmta(
+			[[\fill[<>!60!white] ]],
+			{ i(1, "blue") }
+		), { condition = tex_utils.in_tikz_lnstart }),
+	s({ trig = "fb", descr = "Fill with border", snippetType = "autosnippet", wordTrig = false},
+		fmta(
+			[[\filldraw[fill=<>!60!white, draw=black] ]],
+			{ i(1, "blue") }
+		), { condition = tex_utils.in_tikz_lnstart }),
+	s({ trig = "aa", descr = "Draw axes", snippetType = "autosnippet", wordTrig = false },
+		fmta(
+			[[
+				\draw[very thick,-<>] (0,0) -- (<>,0) node[anchor=north west] {<>};
+				\draw[very thick,-<>] (0,0) -- (0,<>) node[anchor=south east] {<>};
+			]],
+			{ t(">"), i(1, "8.5"), i(2, "x-akse"), t(">"), i(3, "8.5"), i(4, "y-akse") }
+		), { condition = tex_utils.in_tikz_lnstart }),
+	s({ trig = "an", descr = "Axes numbers", snippetType = "autosnippet", wordTrig = false },
+		fmta(
+			[[
+				\foreach \x in {<>,<>,...,<>}
+					\draw (\x cm,1pt) -- (\x cm,-1pt) node[anchor=north] {$\x$};
+				\foreach \y in {<>,<>,...,<>}
+					\draw (1pt, \y cm) -- (-1pt, \y cm) node[anchor=east] {$\y$};
+			]],
+			{ i(1, "0"), i(2, "Step"), i(3, "8"), i(4, "0"), i(5, "Step"), i(6, "8") }
+		), { condition = tex_utils.in_tikz_lnstart }),
+	----------
 	-- List --
 	----------
-	s({ trig = "ls", descr = "List a) b) c)" },
+	s({ trig = "ls", descr = "List a) b) c)", wordTrig = false, snippetType = "autosnippet" },
 		fmta(
 			[[
 				\renewcommand{\labelenumi}{\alph{enumi})}
@@ -207,8 +298,8 @@ return {
 				\end{enumerate}
 			]],
 			{ i(1) }
-		), { condition = line_begin }),
-	s({ trig = "lr", descr = "Resume list" },
+		), { condition = tex_utils.in_text_lnstart }),
+	s({ trig = "lr", descr = "Resume list", wordTrig = false, snippetType = "autosnippet" },
 		fmta(
 			[[
 				\begin{enumerate}[resume]
@@ -216,8 +307,8 @@ return {
 				\end{enumerate}
 			]],
 			{ i(1) }
-		), { condition = line_begin }),
-	s({ trig = "li", descr = "List item", regTrig = true, wordTrig = false },
+		), { condition = tex_utils.in_text_lnstart }),
+	s({ trig = "li", descr = "List item", snippetType = "autosnippet", wordTrig = false },
 		fmta(
 			[[<>\item <>]],
 			{ f( function(_, snip) return snip.captures[1] end ), i(1) }
