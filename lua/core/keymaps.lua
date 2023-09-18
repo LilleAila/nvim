@@ -30,9 +30,10 @@ local wk = require("which-key")
 wk.register({
 	e = {
 		name = "Explorer",
+		e = { "<cmd>Telescope file_browser<cr>", "Telescope file browser (?)" },
 		f = { "<cmd>NvimTreeFocus<cr>", "Focus Nvim Tree" },
-		e = { "<cmd>NvimTreeToggle<cr>", "Toggle Nvim Tree" },
-		r = { function() require("ranger-nvim").open(true) end, "Open ranger" },
+		t = { "<cmd>NvimTreeToggle<cr>", "Toggle Nvim Tree" },
+		-- r = { function() require("ranger-nvim").open(true) end, "Open ranger" },
 	},
 	t = {
 		name = "Telescope",
@@ -40,6 +41,15 @@ wk.register({
 		r = { "<cmd>Telescope oldfiles<cr>", "Find recent files" },
 		s = { "<cmd>Telescope live_grep<cr>", "Find string in cwd" },
 		c = { "<cmd>Telescope grep_string<cr>", "Find string under cursor in cwd" },
+		n = { function() require("telescope").extensions.notify.notify() end, "Show notifications" },
+	},
+	s = {
+		name = "Sessions",
+		o = { "<cmd>SessionManager load_session<cr>", "Open session" },
+		l = { "<cmd>SessionManager load_last_session<cr>", "Load last session" },
+		c = { "<cmd>SessionManager load_current_dir_session<cr>", "Load session in cwd" },
+		d = { "<cmd>SessionManager delete_session<cr>", "Delete sessions" },
+		s = { "<cmd>SessionManager save_current_session<cr>", "Save session" },
 	},
 	q = {
 		name = "File",
@@ -55,6 +65,8 @@ wk.register({
 		l = { "<cmd>Lazy<cr>", "Open lazy" },
 		m = { "<cmd>Mason<cr>", "Open mason" },
 		s = { function() require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/LuaSnip/" }) end, "Reload snippets" },
+		a = { "<cmd>Alpha<cr>", "Open dashboard" },
+		A = { function() require("ascii").preview() end, "Preview ascii" },
 	},
 	k = {
 		name = "LaTeX", -- TODO: Make this only work for .tex buffers

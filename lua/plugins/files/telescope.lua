@@ -26,9 +26,19 @@ return {
 						enable_preview = true,
 					}
 				},
+				extensions = {
+					file_browser = {
+						hijack_netrw = true,
+					}
+				}
 			})
 
 			telescope.load_extension("fzf")
+			telescope.load_extension("file_browser")
 		end,
+	},
+	{
+		"nvim-telescope/telescope-file-browser.nvim",
+		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
 	}
 }
