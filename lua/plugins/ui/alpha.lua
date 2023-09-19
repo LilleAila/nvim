@@ -10,7 +10,8 @@ local function button(sc, icon, txt, keybind, keybind_opts)
 		cursor = 3,
 		width = 50,
 		align_shortcut = "right",
-		hl_shortcut = "Keyword",
+		-- hl_shortcut = "Keyword",
+		hl_shortcut = "Type", -- Blue instead of orange
 	}
 	if keybind then
 		keybind_opts = if_nil(keybind_opts, { noremap = true, silent = true, nowait = true })
@@ -32,6 +33,29 @@ end
 
 local padding = { type = "padding", val = 2 }
 
+local factorio = {
+	[[                 ttf(U                ]],
+	[[                 fxctzO               ]],
+	[[      n)(u    [|(jUUJuqm     $ $      ]],
+	[[     {11zf00fnc|tUcCQnLvzfjn (YCLh    ]],
+	[[      qJXc`.crvcXJjC/xUQOUw0vuYXUJk   ]],
+	[[      1nn"vvrxnutcx0JcvLYzXcQZJch     ]],
+	[[     1)vnnrunX0hopqdpbdCmrcvJvhpk     ]],
+	[[    /1LLvjvXZa*        mdZzYcXLbq     ]],
+	[[+|lOnO+YCzYqba          zOuvrnxpwm    ]],
+	[[|)ufz[ucvCbdk            J{uzvXYkLUU0O]],
+	[[mhphJtLvnxjkh            xicvnuZwxzumq]],
+	[[    nxmuZcXnbh          U.rnxUuwzZxCkd]],
+	[[     xY0czvvrmd        t+nYrYcZh&M    ]],
+	[[     jv0JXcuYYfOpqZccX}rYXXuJO&kM     ]],
+	[[     )nnX0CuJvznmQxunXj(urjzqa*W      ]],
+	[[   xqpJtYCbbJJJvuJrnxuUvvJbMm0Yo      ]],
+	[[    Zdkp8 &#h**MZYLzuC8o#WMYQYhMk     ]],
+	[[              &o0Jzp&&WW   $###W      ]],
+	[[               kzvuU8                 ]],
+	[[               faM#h                  ]],
+}
+
 return {
 	{
 		"goolord/alpha-nvim",
@@ -45,11 +69,13 @@ return {
 			local header = {
 					type = "text",
 					-- val = ascii.get_random("text", "neovim"),
-					val = ascii.art.planets.planets.saturn_plus,
+					-- val = ascii.art.planets.planets.saturn_plus,
+					val = factorio,
 					-- val = ascii.art.gaming.doom.logo,
 					opts = {
 							position = "center",
-							hl = "Type",
+							-- hl = "Type",
+							hl = "Keyword" -- Orange instead of blue header
 					},
 			}
 

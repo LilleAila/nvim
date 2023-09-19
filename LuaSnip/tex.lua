@@ -61,14 +61,26 @@ end
 tex_utils.in_list_nlnstart = function(a, b, c)
 	return tex_utils.in_list() and not line_begin(a, b, c)
 end
-
+tex_utils.in_list_nlnstart_math = function()
+	return tex_utils.in_list_nlnstart and tex_utils.in_mathzone()
+end
+tex_utils.in_flalign = function(a, b, c)
+	return tex_utils.in_env("flalign*") and not tex_utils.in_list() and not line_begin(a, b, c)
+end
+tex_utils.not_in_flalign = function()
+	return not tex_utils.in_env("flalign*")
+end
+tex_utils.not_in_flalign_nl = function(a, b, c)
+	return tex_utils.not_in_flalign and not line_begin(a, b, c)
+end
 -- local nl_whitespace = function(line_to_cursor, matched_trigger, captures)
 -- 	local whitespaceEnding = not not string.match(line_to_cursor, "%s" .. matched_trigger .. "$")
 -- 	local lineStart = line_begin(line_to_cursor, matched_trigger, captures)
 -- 	return whitespaceEnding or lineStart
 -- end
 
--- TODO: bold text, underset text, section, italic text, environment, image, centered, newline, a) b) list, list item, vertical space, control sequence with args, control sequence with two args, control sequence with no args <- and ones with optional args ([])
+-- Function to re-insert capture
+-- f( function(_, snip) return snip.captures[1] end )
 
 --------------
 -- Snippets --
@@ -117,12 +129,20 @@ return {
 	s({ trig = "ml", descr = "Multiline Math", snippetType = "autosnippet", wordTrig = false },
 		fmta(
 			[[
-				\begin{gather*}
-					<>
-				\end{gather*}
+				\begin{flalign*}
+					& <> & <>
+				\end{flalign*}
 			]],
-			{ i(1) }
+			{ i(1), i(0) }
 		), { condition = tex_utils.in_text_lnstart }),
+	s({ trig = "(%s)ln", descr = "Left-aligned newline", snippetType = "autosnippet", wordTrig = false, regTrig = true },
+		fmta(
+			[[
+				<> \\
+				& <> &
+			]],
+			{ f( function(_, snip) return snip.captures[1] end ), i(1) }
+		), { condition = tex_utils.in_flalign }),
 	s({ trig = "me", descr = "Unnumbered equation" },
 		fmta(
 			[[
@@ -165,11 +185,11 @@ return {
 	----------
 	-- Text --
 	----------
-	s({ trig = "([%s])ll", deescr = "Newline", snippetType = "autosnippet", regTrig = true, wordTrig = false },
+	s({ trig = "(%s)ll", deescr = "Newline", snippetType = "autosnippet", regTrig = true, wordTrig = false },
 		fmta(
 			[[<>\\]],
 			{ f( function(_, snip) return snip.captures[1] end ) }
-		)),
+		), { condition = tex_utils.not_in_flalign_nl }),
 	s({ trig = "pr", descr = "New paragraph", snippetType = "autosnippet", wordTrig = false },
 		{ t([[\par]]) },
 		{ condition = line_begin }),
@@ -328,14 +348,14 @@ return {
 			]],
 			{ f( function(_, snip) return snip.captures[1] end ), i(1), i(2) }
 		), { condition = tex_utils.in_list_nlnstart }),
-	s({ trig = "(%s)nl", descr = "List math line", snippetType = "autosnippet", wordTrig = false, regTrig = true },
+	s({ trig = "(%s)ll", descr = "List math line", snippetType = "autosnippet", wordTrig = false, regTrig = true },
 		fmta(
 			[[
 				<>\\[5pt]
 				& <> &
 			]],
 			{ f( function(_, snip) return snip.captures[1] end ), i(1) }
-		), { condition = tex_utils.in_list_nlnstart }),
+		), { condition = tex_utils.in_list_nlnstart_math }),
 	-----------
 	-- Other --
 	-----------
