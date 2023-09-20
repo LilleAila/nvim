@@ -17,36 +17,38 @@ return {
 			-- Tectonic is easier to install, but latexmk can continuously compile
 			g.vimtex_compiler_method = "latexmk" -- latexmk, tectonic
 			g.vimtex_view_enabled = 1
-			g.vimtex_view_method = "skim" -- zathura (linux), skim (macos), general (cross-platform)
-			g.vimtex_view_skim_activate = 1 -- Switch to skim on :VimtexView
+			-- g.vimtex_view_method = "skim" -- zathura (linux), skim (macos), general (cross-platform)
+			-- g.vimtex_view_skim_activate = 1 -- Switch to skim on :VimtexView
+			-- g.vimtex_view_method = "zathura_simple"
+			-- g.vimtex_view_zathura_activate = 1
 
-			-- local function TexFocusNvim()
-			-- 	vim.fn.system("open -a iTerm") -- alacritty, iTerm, wezterm etc.
-			-- 	vim.cmd("redraw!")
-			-- end
-			--
-			-- vim.api.nvim_create_augroup("vimtex_event_focus", { clear = true })
-			-- vim.api.nvim_create_autocmd("VimtexEventViewReverse", {
-			-- 	group = "vimtex_event_focus",
-			-- 	callback = TexFocusNvim,
-			-- })
+			local platform = vim.loop.os_uname().sysname
 
-			-- The above lua code does not work
-			-- Idk wai
-			vim.cmd([[
-				function! s:TexFocusVim() abort
-					" Replace `TERMINAL` with the name of your terminal application
-					" Example: execute "!open -a iTerm"  
-					" Example: execute "!open -a Alacritty"
-					silent execute "!open -a iTerm"
-					redraw!
-				endfunction
+			if platform == "Darwin" then
+				g.vimtex_view_method = "skim"
+				g.vimtex_view_skin_activate = 1
 
-				augroup vimtex_event_focus
-					au!
-					au User VimtexEventViewReverse call s:TexFocusVim()
-				augroup END
-			]])
+				vim.cmd([[
+					function! s:TexFocusVim() abort
+						" Replace `TERMINAL` with the name of your terminal application
+						" Example: execute "!open -a iTerm"  
+						" Example: execute "!open -a Alacritty"
+						silent execute "!open -a iTerm"
+						redraw!
+					endfunction
+
+					augroup vimtex_event_focus
+						au!
+						au User VimtexEventViewReverse call s:TexFocusVim()
+					augroup END
+				]])
+			elseif platform == "Linux" then
+				g.vimtex_view_method = "zathura_simple"
+				g.vimtex_view_zathura_activata = 1
+			else
+				g.vimtex_view_method = "generic"
+			end
+
 		end,
 	}
 }
