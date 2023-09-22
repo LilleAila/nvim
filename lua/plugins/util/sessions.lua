@@ -12,7 +12,7 @@ return {
 				pattern = "SessionSavePre",
 				group = config_group,
 				callback = function()
-					vim.cmd("<cmd>NvimTreeClose<cr>")
+					vim.cmd("NvimTreeClose")
 				end,
 			})
 		end,
