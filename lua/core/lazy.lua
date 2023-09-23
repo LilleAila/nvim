@@ -17,6 +17,7 @@ require("lazy").setup({
 	{ import = "plugins.ts" },
 	{ import = "plugins.ui" },
 	{ import = "plugins.util" },
+	{ import = "plugins.games" },
 }, {
 	change_detection = {
 		notify = false,
