@@ -95,6 +95,8 @@ return {
 							button("SPC s l", "󰥔", "Load last session"),
 							button("SPC s o", "", "Pick session"),
 							button("SPC m c", "", "Change color scheme"),
+							button("c", "", "Edit config", "<cmd>cd ~/.config/nvim<cr> <cmd>SessionManager load_current_dir_session<cr>"), -- CD to config and load last session
+							button("q", "", "Quit", "<cmd>qa!<cr>"),
 						},
 						opts = {
 							spacing = 1,
