@@ -1,6 +1,8 @@
 return {
 	{
 		"lukas-reineke/indent-blankline.nvim",
+		dependencies = "zaldih/themery.nvim",
+		after = "zaldih/themery.nvim",
 		config = function()
 			vim.opt.list = true
 			vim.opt.listchars:append "space:⋅"

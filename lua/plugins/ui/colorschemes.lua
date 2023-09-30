@@ -21,9 +21,26 @@ return {
 		end,
 	},
 	{
+		"Mofiqul/dracula.nvim",
+		config = function()
+			require("dracula").setup({
+				colors = {
+					bg = '#0E1419',
+					bright_red = '#EC6A88',
+					comment = '#B08BBB',
+					orange = '#FFBFA9',
+					red = '#E95678',
+					selection = '#3C4148',
+				},
+				italic_comment = true,
+			})
+		end,
+	},
+	{
 		"zaldih/themery.nvim",
 		priority = 1000,
 		config = function()
+			require("core.theme")
 			vim.opt.background = "dark"
 			require("themery").setup({
 				-- themes = { "catppuccin", "ayu" },
@@ -36,6 +53,8 @@ return {
 					{ name = "Tokyonight storm", colorscheme = "tokyonight-storm" },
 					{ name = "Tokyonight night", colorscheme = "tokyonight-night" },
 					{ name = "Tokyonight moon", colorscheme = "tokyonight-moon" },
+					{ name = "Dracula", colorscheme = "dracula" },
+					{ name = "Dracula soft", colorscheme = "dracula-soft" },
 					{ name = "Oxocarbon", colorscheme = "oxocarbon", before = [[vim.opt.background = "dark"]] },
 					{ name = "Nightfly", colorscheme = "nightfly" },
 					{ name = "Moonfly", colorscheme = "moonfly" },
