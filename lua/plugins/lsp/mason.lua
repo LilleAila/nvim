@@ -68,6 +68,7 @@ return {
 			local lspconfig = require("lspconfig")
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
+			-- All other LSPs are auto-configured with default options
 			local configs = {
 				["lua_ls"] = {
 					settings = {

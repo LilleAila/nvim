@@ -1,3 +1,5 @@
+-- https://www.ejmastnak.com/tutorials/vim-latex/luasnip/
+
 local ls = require("luasnip")
 local s = ls.snippet
 local sn = ls.snippet_node
