@@ -33,15 +33,16 @@ wk.register({
 		e = { "<cmd>Telescope file_browser<cr>", "Telescope file browser (?)" },
 		f = { "<cmd>NvimTreeFocus<cr>", "Focus Nvim Tree" },
 		t = { "<cmd>NvimTreeToggle<cr>", "Toggle Nvim Tree" },
-		-- r = { function() require("ranger-nvim").open(true) end, "Open ranger" },
+		r = { function() require("ranger-nvim").open(true) end, "Open ranger" },
 	},
 	t = {
 		name = "Telescope",
-		f = { "<cmd>Telescope find_files<cr>", "Find files in cwd" },
+		t = { "<cmd>Telescope find_files<cr>", "Find files in cwd" }, -- Most used
 		r = { "<cmd>Telescope oldfiles<cr>", "Find recent files" },
 		s = { "<cmd>Telescope live_grep<cr>", "Find string in cwd" },
 		c = { "<cmd>Telescope grep_string<cr>", "Find string under cursor in cwd" },
 		n = { function() require("telescope").extensions.notify.notify() end, "Show notifications" },
+		u = { function() require("telescope").extensions.undo.undo() end, "Show undo tree" },
 	},
 	s = {
 		name = "Sessions",
