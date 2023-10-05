@@ -94,8 +94,9 @@ return {
 	s({ trig = "doc", descr = "LaTeX document boilerplate" },
 		fmta(
 			[[
+				%! TEX program = pdf_escaped
 				\documentclass[11pt, oneside]{article}
-				\usepackage{mathtools, amssymb, amsthm, graphicx, enumitem, titlesec, tikz, microtype}
+				\usepackage{mathtools, amssymb, amsthm, graphicx, enumitem, titlesec, tikz, microtype, minted, xparse, tcolorbox}
 				\usepackage[a4paper, margin=1in]{geometry}
 				\mathtoolsset{showonlyrefs}
 				\graphicspath{ {./images/} }
@@ -106,12 +107,23 @@ return {
 				\date{<>}
 				\author{<>}
 
-				\renewcommand{\labelenumi}{\alph{enumi}}
-				\titleformat*{\section}{\fontsize{12}{15}\selectfont}
+				\renewcommand{\labelenumi}{\alph{enumi})}
+				\titleformat*{\section}{\fontsize{14}{18}\selectfont}
 				\titleformat*{\subsection}{\fontsize{10}{12}\selectfont}
 				\pagestyle{empty}
 				\pagenumbering{gobble}
 				\begin{document}
+
+				\definecolor{bg}{HTML}{282828}
+				\usemintedstyle{monokai}
+				\setminted{bgcolor=bg}
+
+				\newtcolorbox{mintedbox}{
+					arc=5mm,
+					colframe = bg,
+					colback = bg,
+				}
+
 				\maketitle
 
 				<>
@@ -137,10 +149,10 @@ return {
 			]],
 			{ i(1), i(0) }
 		), { condition = tex_utils.in_text_lnstart }),
-	s({ trig = "(%s)ln", descr = "Left-aligned newline", snippetType = "autosnippet", wordTrig = false, regTrig = true },
+	s({ trig = "(%s)ll", descr = "Left-aligned newline", snippetType = "autosnippet", wordTrig = false, regTrig = true },
 		fmta(
 			[[
-				<> \\
+				<> \\[5pt]
 				& <> &
 			]],
 			{ f( function(_, snip) return snip.captures[1] end ), i(1) }
@@ -184,14 +196,29 @@ return {
 			[[\underset{<>}{<>}]],
 			{ i(1, "Under"), d(2, get_visual) }
 		), { condition = tex_utils.in_mathzone }),
+	s({ trig = "ss", descr = "Square root", wordTrig = false, snippetType="autosnippet" },
+		fmta(
+			[[\sqrt{<>}]],
+			{ i(1) }
+		), { condition = tex_utils.in_mathzone }),
+	s({ trig = "rr", descr = "Nth root", wordTrig = false, snippetType="autosnippet" },
+		fmta(
+			[[\sqrt[<>]{<>}]],
+			{ i(1), i(2) }
+		), { condition = tex_utils.in_mathzone }),
 	----------
 	-- Text --
 	----------
-	s({ trig = "(%s)ll", deescr = "Newline", snippetType = "autosnippet", regTrig = true, wordTrig = false },
+	s({ trig = "(%s)ll", deescr = "Newline with more spacing", snippetType = "autosnippet", regTrig = true, wordTrig = false },
 		fmta(
-			[[<>\\]],
+			"<>\\\\[5pt]",
 			{ f( function(_, snip) return snip.captures[1] end ) }
-		), { condition = tex_utils.not_in_flalign_nl }),
+		), { condition = tex_utils.in_text }),
+	s({ trig = "(%s)nn", deescr = "Newline", snippetType = "autosnippet", regTrig = true, wordTrig = false },
+		fmta(
+			"<>\\\\",
+			{ f( function(_, snip) return snip.captures[1] end ) }
+		), { condition = tex_utils.in_text }),
 	s({ trig = "pr", descr = "New paragraph", snippetType = "autosnippet", wordTrig = false },
 		{ t([[\par]]) },
 		{ condition = line_begin }),
@@ -287,12 +314,12 @@ return {
 		), { condition = tex_utils.in_tikz_lnstart }),
 	s({ trig = "ff", descr = "Fill color", snippetType = "autosnippet", wordTrig = false },
 		fmta(
-			[[\fill[<>!60!white] ]],
+			[[\fill[<>!50!white] ]],
 			{ i(1, "blue") }
 		), { condition = tex_utils.in_tikz_lnstart }),
 	s({ trig = "fb", descr = "Fill with border", snippetType = "autosnippet", wordTrig = false},
 		fmta(
-			[[\filldraw[fill=<>!60!white, draw=black] ]],
+			[[\filldraw[fill=<>!50!white, draw=black] ]],
 			{ i(1, "blue") }
 		), { condition = tex_utils.in_tikz_lnstart }),
 	s({ trig = "aa", descr = "Draw axes", snippetType = "autosnippet", wordTrig = false },
@@ -319,7 +346,6 @@ return {
 	s({ trig = "ls", descr = "List a) b) c)", wordTrig = false, snippetType = "autosnippet" },
 		fmta(
 			[[
-				\renewcommand{\labelenumi}{\alph{enumi})}
 				\begin{enumerate}
 					<>
 				\end{enumerate}

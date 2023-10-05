@@ -16,6 +16,19 @@ return {
 			-- g.maplocalleader = "'"
 			-- Tectonic is easier to install, but latexmk can continuously compile
 			g.vimtex_compiler_method = "latexmk" -- latexmk, tectonic
+			-- g.vimtex_compiler_latexmk = {
+			-- 	["options"] = {
+			-- 		"-shell-escape",
+			-- 		"-verbose",
+			-- 		"-file-line-error",
+			-- 		"-synctex=1",
+			-- 		"-interaction=nonstopmode",
+			-- 	}
+			-- }
+			g.vimtex_compiler_latexmk_engines = {
+				["_"] = "-pdf",
+				["pdf_escaped"] = '-pdf -pdflatex="pdflatex -shell-escape %O %S"',
+			}
 			g.vimtex_view_enabled = 1
 			-- g.vimtex_view_method = "skim" -- zathura (linux), skim (macos), general (cross-platform)
 			-- g.vimtex_view_skim_activate = 1 -- Switch to skim on :VimtexView
