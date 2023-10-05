@@ -133,17 +133,17 @@ map({ "n", "i" }, "<C-y>", "<cmd>redo<cr>", opts("Redo"))
 map({ "n", "i" }, "<CS-z>", "<cmd>redo<cr>", opts("redo"))
 
 -- Move.nvim
-vim.keymap.set({ "n", "i" }, "<A-j>", ":MoveLine(1)<CR>", opts("Move line down"))
-vim.keymap.set({ "n", "i" }, "<A-k>", ":MoveLine(-1)<CR>", opts("Move line up"))
-vim.keymap.set("n", "<A-h>", ":MoveHChar(-1)<CR>", opts("Move Char Left"))
-vim.keymap.set("n", "<A-l>", ":MoveHChar(1)<CR>", opts("Move char right"))
-vim.keymap.set("n", "<leader>wf", ":MoveWord(1)<CR>", opts("Move word right"))
-vim.keymap.set("n", "<leader>wb", ":MoveWord(-1)<CR>", opts("Move word left"))
+map({ "n", "i" }, "<A-j>", ":MoveLine(1)<CR>", opts("Move line down"))
+map({ "n", "i" }, "<A-k>", ":MoveLine(-1)<CR>", opts("Move line up"))
+map("n", "<A-h>", ":MoveHChar(-1)<CR>", opts("Move Char Left"))
+map("n", "<A-l>", ":MoveHChar(1)<CR>", opts("Move char right"))
+map("n", "<leader>wf", ":MoveWord(1)<CR>", opts("Move word right"))
+map("n", "<leader>wb", ":MoveWord(-1)<CR>", opts("Move word left"))
 
-vim.keymap.set("v", "<A-j>", ":MoveBlock(1)<CR>", opts("Move block down"))
-vim.keymap.set("v", "<A-k>", ":MoveBlock(-1)<CR>", opts("Move block up"))
-vim.keymap.set("v", "<A-h>", ":MoveHBlock(-1)<CR>", opts("Move block left"))
-vim.keymap.set("v", "<A-l>", ":MoveHBlock(1)<CR>", opts("Move block right"))
+map("v", "<A-j>", ":MoveBlock(1)<CR>", opts("Move block down"))
+map("v", "<A-k>", ":MoveBlock(-1)<CR>", opts("Move block up"))
+map("v", "<A-h>", ":MoveHBlock(-1)<CR>", opts("Move block left"))
+map("v", "<A-l>", ":MoveHBlock(1)<CR>", opts("Move block right"))
 
 -- Luasnip is configured in lua/plugins/lsp/cmp.lua
 
