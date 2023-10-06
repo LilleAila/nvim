@@ -262,12 +262,23 @@ return {
 	s({ trig = "tt", descr = "Tikz picture", snippetType = "autosnippet", wordTrig = false },
 		fmta(
 			[[
-				\begin{tikzpicture}
+				\begin{tikzpicture}[scale=<>]
 					<>
 				\end{tikzpicture}
 			]],
-			{ i(1) }
-		), { condition = line_begin }),
+			{ i(1, "1.0"), i(2) }
+		), { condition = tex_utils.in_text_lnstart }),
+	s({ trig = "tc", descr = "Centered tikzpictura", snippetType = "autosnippet", wordTrig = false },
+		fmta(
+			[[
+				\begin{center}
+					\begin{tikzpicture}[scale=<>]
+						<>
+					\end{tikzpicture}
+				\end{center}
+			]],
+			{ i(1, "1.0"), i(2) }
+		), { condition = tex_utils.in_text_lnstart }),
 	---------- Generic
 	s({ trig = "dd", descr = "Generic draw", snippetType = "autosnippet", wordTrig = false },
 		fmta(
@@ -296,7 +307,7 @@ return {
 			[[(<>,<>) rectangle (<>,<>);]],
 			{ i(1), i(2), i(3), i(4) }
 		), { condition = tex_utils.in_tikz_nlnstart }),
-	s({ trig = "cc", descr = "Draw circle", snippetType = "autosnippet", wordTrig = false },
+	s({ trig = "ci", descr = "Draw circle", snippetType = "autosnippet", wordTrig = false },
 		fmta(
 			[[(<>,<>) circle (<>cm);]],
 			{ i(1), i(2), i(3) }
@@ -387,6 +398,37 @@ return {
 	-----------
 	-- Other --
 	-----------
+	s({ trig = "nc", descr = "New document command", snippetType = "autosnippet", wordTrig = false, regTrig = false },
+		fmta(
+			[[
+				\NewDocumentCommand{\<>}{ <> }{
+					<>
+				}
+			]],
+			{ i(1, "name"), i(2, "m 0{0}  (m for mandatory var and 0{default_val} for optional)"), i(3, "Variables with #1 and #2 etc.") }
+		), {condition = tex_utils.in_text_lnstart }),
+	s({ trig = "bb", descr = "Code block", snippetType = "autosnippet", wordTrig = false, regTrig = false },
+		fmta(
+			[[
+				\begin{mintedbox}
+				\begin{minted}{<>}
+				<>
+				\end{minted}
+				\end{mintedbox}
+			]],
+			{ i(1, "python"), i(2) }
+		), { condition = tex_utils.in_text_lnstart }),
+	s({ trig = "bi", descr = "Code block import", snippetType = "autosnippet", wordTrig = false, regTrig = false },
+		fmta(
+			[[
+				\begin{mintedbox}
+					\inputminted{<>}{<>}
+				\end{mintedbox}
+			]],
+			{ i(1, "python"), i(2, "main.py") }
+		), { condition = tex_utils.in_text_lnstart }),
+
+
 	s({ trig = "new", descr = "Generic environment", wordTrig = false },
 		fmta(
 			[[

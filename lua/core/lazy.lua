@@ -13,11 +13,10 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	{ import = "plugins.files" },
 	{ import = "plugins.lsp" },
-	{ import = "plugins.other" },
 	{ import = "plugins.ts" },
 	{ import = "plugins.ui" },
 	{ import = "plugins.util" },
-	{ import = "plugins.games" },
+	-- { import = "plugins.games" },
 }, {
 	change_detection = {
 		notify = false,
