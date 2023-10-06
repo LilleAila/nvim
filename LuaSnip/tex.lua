@@ -112,7 +112,6 @@ return {
 				\titleformat*{\subsection}{\fontsize{10}{12}\selectfont}
 				\pagestyle{empty}
 				\pagenumbering{gobble}
-				\begin{document}
 
 				\definecolor{bg}{HTML}{282828}
 				\usemintedstyle{monokai}
@@ -124,6 +123,7 @@ return {
 					colback = bg,
 				}
 
+				\begin{document}
 				\maketitle
 
 				<>
