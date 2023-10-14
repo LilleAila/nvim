@@ -4,7 +4,7 @@ return {
 		branch = "0.1.x",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+			{ "nvim-telescope/telescope-fzf-native.nvim", build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build" },
 			"nvim-tree/nvim-web-devicons",
 			"debugloop/telescope-undo.nvim",
 		},
@@ -40,12 +40,17 @@ return {
 							preview_height = 0.8
 						},
 					},
+					media_files = {
+						filetypes = { "png", "webp", "jpg", "jpeg", "mov", "mp4", "webm", "aif", "pdf" },
+						find_cmd = "rg"
+					}
 				}
 			})
 
 			telescope.load_extension("fzf")
 			telescope.load_extension("file_browser")
 			telescope.load_extension("undo")
+			telescope.load_extension("media_files")
 			-- telescope.load_extension("projects")
 		end,
 	},
@@ -53,4 +58,12 @@ return {
 		"nvim-telescope/telescope-file-browser.nvim",
 		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
 	},
+	{
+		"nvim-telescope/telescope-media-files.nvim",
+		dependencies = {
+			"nvim-lua/popup.nvim",
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim"
+		}
+	}
 }

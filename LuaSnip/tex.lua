@@ -104,8 +104,8 @@ return {
 				\setlength{\parindent}{0pt}
 
 				\title{\vspace{-2cm}<>}
-				\date{<>}
 				\author{<>}
+				\date{<>}
 
 				\renewcommand{\labelenumi}{\alph{enumi})}
 				\titleformat*{\section}{\fontsize{14}{18}\selectfont}
@@ -130,7 +130,7 @@ return {
 
 				\end{document}
 			]],
-			{ i(1, "Title"), i(2, "Date"), i(3, "Author"), i(4) }
+			{ i(1, ""), i(2, ""), i(3, ""), i(4) }
 		), { condition = line_begin }),
 	-------------------
 	-- Math Snippets --
@@ -167,6 +167,11 @@ return {
 			{ i(1) }
 		), { condition = tex_utils.in_text_lnstart }),
 	---------------------
+	s({ trig = "^", descr = "Exponent", snippetType = "autosnippet", wordTrig = false},
+		fmta(
+			[[^{<>}]],
+			{ i(1) }
+		), { condition = tex_utils.in_mathzone }),
 	s({ trig = "pp", descr = "Parenthesis", snippetType = "autosnippet", wordTrig = false },
 		fmta(
 			[[\left(<>\right)]],
