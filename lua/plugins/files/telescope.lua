@@ -4,7 +4,8 @@ return {
 		branch = "0.1.x",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			{ "nvim-telescope/telescope-fzf-native.nvim", build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build" },
+			-- { "nvim-telescope/telescope-fzf-native.nvim", build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build" },
+			"nvim-telescope/telescope-fzy-native.nvim",
 			"nvim-tree/nvim-web-devicons",
 			"debugloop/telescope-undo.nvim",
 		},
@@ -28,6 +29,16 @@ return {
 					}
 				},
 				extensions = {
+					fzf = {
+						fuzzy = true,
+						override_generic_sorter = true,
+						override_file_sorter = true,
+						case_mode = "smart_case",
+					},
+					fzy_native = {
+						override_generic_sorter = true,
+						override_file_sorter = true,
+					},
 					file_browser = {
 						hijack_netrw = true,
 					},
@@ -42,12 +53,13 @@ return {
 					},
 					media_files = {
 						filetypes = { "png", "webp", "jpg", "jpeg", "mov", "mp4", "webm", "aif", "pdf" },
-						find_cmd = "rg"
+						-- find_cmd = "rg"
 					}
 				}
 			})
 
-			telescope.load_extension("fzf")
+			telescope.load_extension("fzy_native")
+			-- telescope.load_extension("fzf")
 			telescope.load_extension("file_browser")
 			telescope.load_extension("undo")
 			telescope.load_extension("media_files")
