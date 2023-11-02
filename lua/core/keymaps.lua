@@ -68,6 +68,8 @@ wk.register({
 		s = { function() require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/LuaSnip/" }) end, "Reload snippets" },
 		a = { "<cmd>Alpha<cr>", "Open dashboard" },
 		A = { function() require("ascii").preview() end, "Preview ascii" },
+		F = { function() vim.fn.system({ "open", "steam://run/427520//" }) end, "Start factorio through steam" },
+		f = { function() vim.cmd("!/Users/olaisolsvik/Library/Application\\ Support/Steam/steamapps/common/Factorio/factorio.app/Contents/MacOS/factorio --mod-directory /Users/olaisolsvik/Projects/factorio_mods > /dev/null 2>&1") end, "Start factorio with custom mods folder" }
 	},
 	k = {
 		name = "LaTeX", -- TODO: Make this only work for .tex buffers

@@ -63,9 +63,9 @@ return {
 					-- preset = "powerline",
 					separator_at_end = false,
 				},
-				sidebar_filetypes = {
-					NvimTree = true,
-				},
+				-- sidebar_filetypes = {
+				-- 	NvimTree = false, -- Do not offset when NvimTree is shown
+				-- },
 			})
 		end,
 	}

@@ -93,37 +93,121 @@ return {
 	------------------
 	s({ trig = "doc", descr = "LaTeX document boilerplate" },
 		fmta(
+			-- [[
+			-- 	%! TEX program = pdf_escaped
+			-- 	\documentclass[11pt, oneside]{article}
+			-- 	\usepackage{mathtools, amssymb, amsthm, graphicx, enumitem, titlesec, tikz, microtype, minted, xparse, tcolorbox}
+			-- 	\usepackage[a4paper, margin=1in]{geometry}
+			-- 	\mathtoolsset{showonlyrefs}
+			-- 	\graphicspath{ {./images/} }
+			-- 	\usepackage[parfill]{parskip}
+			-- 	\setlength{\parindent}{0pt}
+			--
+			-- 	\title{\vspace{-2cm}<>}
+			-- 	\author{<>}
+			-- 	\date{<>}
+			--
+			-- 	\renewcommand{\labelenumi}{\alph{enumi})}
+			-- 	\titleformat*{\section}{\fontsize{14}{18}\selectfont}
+			-- 	\titleformat*{\subsection}{\fontsize{10}{12}\selectfont}
+			-- 	\pagestyle{empty}
+			-- 	\pagenumbering{gobble}
+			--
+			-- 	\definecolor{bg}{HTML}{282828}
+			-- 	\usemintedstyle{monokai}
+			-- 	\setminted{bgcolor=bg}
+			--
+			-- 	\newtcolorbox{mintedbox}{
+			-- 		arc=5mm,
+			-- 		colframe = bg,
+			-- 		colback = bg,
+			-- 	}
+			--
+			-- 	\begin{document}
+			-- 	\maketitle
+			--
+			-- 	<>
+			--
+			-- 	\end{document}
+			-- ]],
 			[[
-				%! TEX program = pdf_escaped
-				\documentclass[11pt, oneside]{article}
-				\usepackage{mathtools, amssymb, amsthm, graphicx, enumitem, titlesec, tikz, microtype, minted, xparse, tcolorbox}
-				\usepackage[a4paper, margin=1in]{geometry}
-				\mathtoolsset{showonlyrefs}
+				\documentclass[10pt, oneside]{article}
+				\usepackage[a4paper, margin=1.5cm]{geometry}
+				\usepackage[parfill]{parskip} % Better line breaks
+				\usepackage{xcolor} % Colored text: \textcolor{color}{text}
+				\usepackage{lmodern} % Change the font
+				\usepackage{multicol} % Add \begin{multicols}{} environment
+
+				%%%%% Images
+				\iffalse % This is a native way to use multiline comments
+				\usepackage{graphicx} % Images
 				\graphicspath{ {./images/} }
-				\usepackage[parfill]{parskip}
+				\fi
+				%%%%%
+
+				%%%%% Math
+				\usepackage{mathtools, amssymb, amsthm, amsmath, array} % Math
+				\mathtoolsset{showonlyrefs}
 				\setlength{\parindent}{0pt}
+				%%%%%
 
-				\title{\vspace{-2cm}<>}
-				\author{<>}
-				\date{<>}
-
+				%%%%% Lists
+				\usepackage{enumitem} % Custom lists
+				\newcommand\Item[1][]{ % Add a custom list item that removes vertical space with math items
+					% Use \Item instead of \item
+					\ifx\relax#1\relax  \item \else \item[#1] \fi
+					\abovedisplayskip=0pt\abovedisplayshortskip=0pt~\vspace*{-\baselineskip}}
 				\renewcommand{\labelenumi}{\alph{enumi})}
+				%%%%%
+
+				%%%%% Custom title font sizes
+				\usepackage{titlesec} % Changing title font size
 				\titleformat*{\section}{\fontsize{14}{18}\selectfont}
 				\titleformat*{\subsection}{\fontsize{10}{12}\selectfont}
-				\pagestyle{empty}
-				\pagenumbering{gobble}
+				%%%%%
 
+				%%%%%% Syntax highlighting with minted
+				\iffalse
+				% Add this to the beginning when using minted: %! TEX program = pdf_escaped
+				\usepackage{minted, tcolorbox} % Code blocks and making them look good
 				\definecolor{bg}{HTML}{282828}
 				\usemintedstyle{monokai}
 				\setminted{bgcolor=bg}
-
 				\newtcolorbox{mintedbox}{
 					arc=5mm,
 					colframe = bg,
 					colback = bg,
 				}
+				\fi
+				%%%%%
 
+				%%%%% Document commands
+				\usepackage{xparse} % More advanced document commands
+				%%%%%
+
+				%%%%% Tikzpicture
+				% \usepackage{tikz} % Tikzpicture to draw pictures
+
+				%%% Pgfplots for plotting graphs
+				\iffalse
+				\usepackage{pgfplots}
+				\pgfplotsset{compat=1.18,width=10cm}
+				\usepgfplotslibrary{external}
+				\tikzexternalize
+				\fi
+
+				% \usepackage{circuitikz} % Circuit diagrams
+				%%%%%
+
+				%%%%% Document start
+				\title{\vspace{-2cm}<>}
+				\author{<>}
+				\date{<>}
+
+				\pagestyle{empty}
+				\pagenumbering{gobble} % Remove page numbers
 				\begin{document}
+
 				\maketitle
 
 				<>
@@ -172,10 +256,10 @@ return {
 			[[^{<>}]],
 			{ i(1) }
 		), { condition = tex_utils.in_mathzone }),
-	s({ trig = "pp", descr = "Parenthesis", snippetType = "autosnippet", wordTrig = false },
+	s({ trig = "[%s]pp", descr = "Parenthesis", snippetType = "autosnippet", wordTrig = false, regTrig = true },
 		fmta(
-			[[\left(<>\right)]],
-			{ i(1) }
+			[[<>\left(<>\right)]],
+			{ f( function(_, snip) return snip.captures[1] end ), i(1) }
 		), { condition = tex_utils.in_mathzone }),
 	s({ trig = "ff", descr = "Fraction", snippetType = "autosnippet", wordTrig = false },
 		fmta(

@@ -43,7 +43,6 @@ return {
 			require("core.theme")
 			vim.opt.background = "dark"
 			require("themery").setup({
-				-- themes = { "catppuccin", "ayu" },
 				themes = {
 					{ name = "Ayu mirage", colorscheme = "ayu-mirage", after = [[vim.cmd("hi NvimTreeLineNr guifg=white")]] },
 					{ name = "Ayu dark", colorscheme = "ayu-dark" },
