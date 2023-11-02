@@ -131,8 +131,8 @@ return {
 			-- 	\end{document}
 			-- ]],
 			[[
-				\documentclass[10pt, oneside]{article}
-				\usepackage[a4paper, margin=1.5cm]{geometry}
+				\documentclass[10pt, preview, border=2cm]{standalone}
+				\usepackage[a4paper, margin=2cm]{geometry}
 				\usepackage[parfill]{parskip} % Better line breaks
 				\usepackage{xcolor} % Colored text: \textcolor{color}{text}
 				\usepackage{lmodern} % Change the font
