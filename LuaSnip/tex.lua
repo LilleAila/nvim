@@ -196,7 +196,7 @@ return {
 				\tikzexternalize
 				\fi
 
-				% \usepackage{circuitikz} % Circuit diagrams
+				% \usepackage[siunitx]{circuitikz} % Circuit diagrams
 				%%%%%
 
 				%%%%% Document start
