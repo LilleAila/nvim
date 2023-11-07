@@ -138,4 +138,14 @@ return {
 			]],
 			{ f( function(_, snip) return snip.captures[1] end ), i(1) }
 		), { condition = tex_utils.in_list_nlnstart_math }),
+
+
+	s({ trig = "yy", descr = "Symbol", snippetType = "autosnippet", wordTrig = false },
+		{ t([[\]]), i(1) }, { condition = tex_utils.in_mathzone }),
+	-- s({ trig = "lor", descr = "Logical or", snippetType = "autosnippet", wordTrig = true },
+	-- 	{ t([[\lor]]) }, { condition = tex_utils.in_mathzone }),
+	-- s({ trig = "land", descr = "Logical and", snippetType = "autosnippet", wordTrig = true },
+	-- 	{ t([[\land]]) }, { condition = tex_utils.in_mathzone }),
+	-- s({ trig = "pi", descr = "pi", snippetType = "autosnippet", wordTrig = true },
+	-- 	{ t([[\pi]]) }, { condition = tex_utils.in_mathzone }),
 }

@@ -42,14 +42,24 @@ return {
 			{ d(1, get_visual) }
 		), { condition = tex_utils.in_text }),
 	-- These sections use *, and will NOT be shown in the \tableofcontents
-	s({ trig = "sec", descr = "Section", wordTrig = false, snippetType = "autosnippet" },
+	s({ trig = "ssec", descr = "Hidden section", wordTrig = false, snippetType = "autosnippet" },
 		fmta(
 			[[\section*{<>}]],
 			{ i(1, "Section") }
 		), { condition = tex_utils.in_text_lnstart }),
-	s({ trig = "sub", descr = "Subsection", wordTrig = false, snippetType = "autosnippet" },
+	s({ trig = "ssub", descr = "Hidden subsection", wordTrig = false, snippetType = "autosnippet" },
 		fmta(
 			[[\subsection*{<>}]],
+			{ i(1, "Subsection") }
+		), { condition = tex_utils.in_text_lnstart }),
+	s({ trig = "sec", descr = "Section", wordTrig = false, snippetType = "autosnippet" },
+		fmta(
+			[[\section{<>}]],
+			{ i(1, "Section") }
+		), { condition = tex_utils.in_text_lnstart }),
+	s({ trig = "sub", descr = "Subsection", wordTrig = false, snippetType = "autosnippet" },
+		fmta(
+			[[\subsection{<>}]],
 			{ i(1, "Subsection") }
 		), { condition = tex_utils.in_text_lnstart }),
 }

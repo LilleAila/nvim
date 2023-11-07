@@ -26,7 +26,8 @@ return {
 				\usepackage[parfill]{parskip} % Better line breaks
 				\usepackage{xcolor} % Colored text: \textcolor{color}{text}
 				\usepackage{lmodern} % Change the font
-				\usepackage{multicol} % Add \begin{multicols}{} environment
+				% \usepackage{multicol} % Add \begin{multicols}{} environment
+				% \usepackage{lipsum} % Lorem Ipsum text: \lipsum[]
 
 				%%%%% Images
 				\iffalse % This is a native way to use multiline comments
@@ -87,6 +88,19 @@ return {
 				\fi
 
 				% \usepackage[siunitx]{circuitikz} % Circuit diagrams
+				%%%%%
+
+				%%%%% Links in \tableofcontents
+				\iffalse
+				\usepackage{hyperref}
+				\hypersetup{
+						colorlinks,
+						citecolor=black,
+						filecolor=black,
+						linkcolor=black,
+						urlcolor=black
+				}
+				\fi
 				%%%%%
 
 				%%%%% Document start
