@@ -60,7 +60,7 @@ return {
 			[[\left(<>\right)]],
 			{ i(1) }
 		), { condition = tex_utils.in_mathzone }),
-	s({ trig = "ff", descr = "Fraction", snippetType = "autosnippet", wordTrig = false },
+	s({ trig = "ff", descr = "Fraction", snippetType = "autosnippet", wordTrig = true },
 		fmta(
 			[[\frac{<>}{<>}]],
 			{ i(1), i(2) }

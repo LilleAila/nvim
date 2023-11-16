@@ -34,6 +34,7 @@ return {
 			-- g.vimtex_view_skim_activate = 1 -- Switch to skim on :VimtexView
 			-- g.vimtex_view_method = "zathura_simple"
 			-- g.vimtex_view_zathura_activate = 1
+			g.vimtex_syntax_conceal_enable = 1
 
 			local platform = vim.loop.os_uname().sysname
 

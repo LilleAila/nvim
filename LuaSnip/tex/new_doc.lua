@@ -29,6 +29,8 @@ return {
 				% \usepackage{multicol} % Add \begin{multicols}{} environment
 				% \usepackage{lipsum} % Lorem Ipsum text: \lipsum[]
 
+				\renewcommand{\contentsname}{Innhold} % Change table of contents title
+
 				%%%%% Images
 				\iffalse % This is a native way to use multiline comments
 				\usepackage{graphicx} % Images
@@ -77,7 +79,10 @@ return {
 				%%%%%
 
 				%%%%% Tikzpicture
-				% \usepackage{tikz} % Tikzpicture to draw pictures
+				\iffalse
+				\usepackage{tikz} % Tikzpicture to draw pictures
+				\usetikzlibrary{calc, angles, quotes, arrows}
+				\fi
 
 				%%% Pgfplots for plotting graphs
 				\iffalse

@@ -13,7 +13,7 @@ function M.in_comment()
 end
 function M.in_env(name)
 	local is_inside = vim.fn["vimtex#env#is_inside"](name)
-	return (is_inside[1] > 0 and is_inside[2] > 0)
+	return (is_inside[1] > 0 and is_inside[2] > 0) and not M.in_comment()
 end
 
 ----- In environments
@@ -74,6 +74,9 @@ function M.in_tikz_wsnl(a, b, c)
 end
 function M.in_flalign_wsnl(a, b, c)
 	return M.in_flalign() and nl_whitespace(a, b, c)
+end
+function M.in_mathzone_wsnl(a, b, c)
+	return M.in_mathzone() and nl_whitespace(a, b, c)
 end
 
 return M

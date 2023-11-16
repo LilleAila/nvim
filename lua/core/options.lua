@@ -5,6 +5,7 @@ local cmd = vim.cmd
 
 g.mapleader = " "
 g.tex_flavor = "latex"
+opt.conceallevel = 2 -- For conceal in vimtex
 
 opt.guifont = "JetBrainsMono Nerd Font:h12"
 opt.encoding = "UTF-8"
@@ -19,7 +20,6 @@ opt.splitbelow = true
 opt.list = true
 opt.splitright = true
 opt.termguicolors = true
-opt.conceallevel = 0
 opt.showtabline = 3
 opt.tabline = " "
 opt.showmode = false
