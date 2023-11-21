@@ -39,7 +39,7 @@ return {
 				%%%%%
 
 				%%%%% Math
-				\usepackage{mathtools, amssymb, amsthm, amsmath, array} % Math
+				\usepackage{mathtools, amssymb, amsthm, amsmath, array, cancel} % Math
 				\mathtoolsset{showonlyrefs}
 				\setlength{\parindent}{0pt}
 				%%%%%

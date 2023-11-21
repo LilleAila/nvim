@@ -57,8 +57,8 @@ return {
 					augroup END
 				]])
 			elseif platform == "Linux" then
-				g.vimtex_view_method = "zathura_simple"
-				g.vimtex_view_zathura_activata = 1
+				g.vimtex_view_method = "zathura"
+				g.vimtex_view_zathura_activate = 1
 			else
 				g.vimtex_view_method = "generic"
 			end
