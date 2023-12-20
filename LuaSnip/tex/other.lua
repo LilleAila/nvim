@@ -63,4 +63,31 @@ return {
 			[[\<>{<>}]],
 			{ i(1), i(2) }
 		)),
+
+	s({ trig = "(%d+)c", descr = "Command with n arguments", snippetType = "autosnippet", wordTrig = false, regTrig = true },
+		{
+			t([[\]]),
+			i(1),
+			f(
+				function(_, snip)
+					local args_count = tonumber(snip.captures[1])
+					local args_string = ""
+					local args_inputs = {}
+					for index = 1, args_count do
+						vim.print(index)
+						args_string = args_string .. "{<>}"
+						table.insert(args_inputs, i(index+1))
+					end
+					return fmta(args_string, args_inputs)
+				end
+			)
+		}),
+
+		s("example4", fmt([[
+  repeat {a} with the same key {a}
+  ]], {
+    a = i(1, "this will be repeat")
+  }, {
+    repeat_duplicates = true
+  }))
 }
