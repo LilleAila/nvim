@@ -6,7 +6,11 @@ end
 
 -- vim.g.mapleader = " "
 
-map("n", "<leader>qa", "<cmd>wqa!<cr>", opts("Save and quit all open files"))
+vim.api.nvim_create_user_command("W", "w", {})
+vim.api.nvim_create_user_command("Wq", "wq", {})
+vim.api.nvim_create_user_command("Wqa", "wqa", {})
+
+-- map("n", "<leader>qa", "<cmd>wqa!<cr>", opts("Save and quit all open files"))
 
 local ls = require("luasnip")
 local undo_snippet = function()
