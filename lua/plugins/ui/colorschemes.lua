@@ -11,6 +11,7 @@ return {
 	"shaunsingh/nord.nvim",
 	"Mofiqul/vscode.nvim",
 	"projekt0n/github-nvim-theme",
+	"ellisonleao/gruvbox.nvim",
 	{
 		"navarasu/onedark.nvim",
 		config = function()
@@ -66,6 +67,8 @@ return {
 					{ name = "Github dark", colorscheme = "github_dark" },
 					{ name = "Github dark dimmed", colorscheme = "github_dark_dimmed" },
 					{ name = "Github dark high contrast", colorscheme = "github_dark_high_contrast" },
+					{ name = "Gruvbox dark", colorscheme = "gruvbox", before = [[vim.o.background="dark"]] },
+					-- { name = "Gruvbox light", colorscheme = "gruvbox", before = [[vim.o.background="light"]] },
 				},
 				themeConfigFile = "~/.config/nvim/lua/core/theme.lua",
 				livePreview = true,

@@ -61,7 +61,8 @@ wk.register({
 	m = {
 		name = "Misc",
 		u = { undo_snippet, "Undo snippet completion" },
-		p = { paste_img, "Paste image from clipboard" },
+		-- p = { paste_img, "Paste image from clipboard" },
+		p = { "<cmd>PasteImage<cr>", "Paste image from clipboard" },
 		c = { "<cmd>Themery<cr>", "Change colorscheme" },
 		l = { "<cmd>Lazy<cr>", "Open lazy" },
 		m = { "<cmd>Mason<cr>", "Open mason" },
