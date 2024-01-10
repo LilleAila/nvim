@@ -7,7 +7,7 @@ g.mapleader = " "
 g.tex_flavor = "latex"
 opt.conceallevel = 2 -- For conceal in vimtex
 
-opt.guifont = "JetBrainsMono Nerd Font:h12"
+-- opt.guifont = "JetBrainsMono Nerd Font:h12"
 opt.encoding = "UTF-8"
 opt.mousemoveevent = true
 opt.hidden = true
