@@ -1,0 +1,15 @@
+{
+	"contributes": {
+		"snippets": [
+			{
+				"language": [ "tex", "latex" ],
+				"path": "./tex.json"
+			},
+			{
+				"language": "all",
+				"path": "./all.json"
+			}
+		]
+	},
+	"name": "my-snippets"
+}

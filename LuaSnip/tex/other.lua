@@ -58,32 +58,42 @@ return {
 			]],
 			{ i(1), i(2), rep(1) }
 		), { condition = tex_utils.in_text_lnstart }),
-	s({ trig = "cc", descr = "Command with one argument", snippetType = "autosnippet", wordTrig = false },
-		fmta(
-			[[\<>{<>}]],
-			{ i(1), i(2) }
-		)),
 
-	s({ trig = "(%d+)c", descr = "Command with n arguments", snippetType = "autosnippet", wordTrig = false, regTrig = true },
-		{
-			t([[\]]),
-			i(1),
-			f(
-				function(_, snip)
-					local args_count = tonumber(snip.captures[1])
-					local args_string = ""
-					local args_inputs = {}
-					for index = 1, args_count do
-						vim.print(index)
-						args_string = args_string .. "{<>}"
-						table.insert(args_inputs, i(index+1))
-					end
-					return fmta(args_string, args_inputs)
+	s({ trig="(%d*)c(%d*)c", name = "Cmd with n args", dscr = "command", snippetType = "autosnippet", regTrig = true, hidden = true },
+	fmta([[
+	\<><> 
+	]],
+	{
+		i(1),
+		d(2, function(_, snip)
+			local nodes = {}
+			local num_ins_nodes = 0
+
+			local num_args = tonumber(snip.captures[1])
+			if num_args ~= nil then
+				for j = 1, num_args do
+					table.insert(nodes, t("{"))
+					table.insert(nodes, i(j))
+					table.insert(nodes, t("}"))
+					num_ins_nodes = j
 				end
-			)
-		}),
+			end
 
-		s("example4", fmt([[
+			local num_opt_args = tonumber(snip.captures[2])
+			if num_opt_args ~= nil then
+				for j = 1, num_opt_args do
+					table.insert(nodes, t("["))
+					table.insert(nodes, i(j + num_ins_nodes))
+					table.insert(nodes, t("]"))
+				end
+			end
+
+			return sn(nil, nodes)
+		end)
+	}
+	)),
+
+	s("example4", fmt([[
   repeat {a} with the same key {a}
   ]], {
     a = i(1, "this will be repeat")

@@ -53,7 +53,7 @@ opt.smartindent = true
 opt.signcolumn = "yes"
 opt.fillchars:append("eob: ")
 opt.listchars:append("space: ")
-cmd("set lazyredraw")
+-- cmd("set lazyredraw")
 cmd("set nolist")
 opt.laststatus = 0
 diagnostic.config({ signs = false })

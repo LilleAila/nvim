@@ -14,34 +14,6 @@ return {
 			local cmp = require("cmp")
 			local ls = require("luasnip")
 
-			-- ls.setup({
-			-- 	update_events = "TextChanged,TextChangedI",
-			-- })
-
-			ls.config.set_config({
-				update_events = "TextChanged,TextChangedI",
-				store_selection_keys = "<Tab>",
-				delete_check_events = "TextChanged",
-				enable_autosnippets = true,
-				history = false,
-			})
-
-			require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/LuaSnip/"}) -- Probably does not work on wandos becus path
-			require("luasnip.loaders.from_vscode").lazy_load()
-
-			-------- Below code probably works but just turned off history instead
-			vim.api.nvim_create_autocmd('ModeChanged', {
-				pattern = '*',
-				callback = function()
-					if ((vim.v.event.old_mode == 's' and vim.v.event.new_mode == 'n') or vim.v.event.old_mode == 'i')
-							and ls.session.current_nodes[vim.api.nvim_get_current_buf()]
-							and not ls.session.jump_active
-					then
-						ls.unlink_current()
-					end
-				end
-			})
-
 			cmp.setup({
 				completion = {
 					completeopt = "menu,menuone,preview,noselect",

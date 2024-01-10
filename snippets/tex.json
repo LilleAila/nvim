@@ -1,0 +1,14 @@
+{
+  "math": {
+    "body": [
+      "\\[",
+      "$0",
+      "\\]"
+    ],
+    "prefix": "math"
+  },
+  "test": {
+    "body": "jeg håper at denne snippeten fungerer",
+    "prefix": "test"
+  }
+}
