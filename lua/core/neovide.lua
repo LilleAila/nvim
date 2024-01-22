@@ -31,6 +31,7 @@ g.neovide_scroll_animation_length = 0.3
 g.neovide_scroll_animation_far_lines = 1
 g.neovide_hide_mouse_when_typing = true
 g.neovide_cursor_vfx_mode = "railgun"
+g.neovide_floating_shadow = false
 
 g.neovide_theme = "auto"
 g.neovide_refresh_rate_idle = 5 -- not on wayland
@@ -39,6 +40,6 @@ g.neovide_fullscreen = false
 g.neovide_remember_window_size = true
 
 g.neovide_input_macos_alt_is_meta = false -- opt+key for symbols won't work
-g.neovide_input_ime = false
+g.neovide_input_ime = true
 
 end

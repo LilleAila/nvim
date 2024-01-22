@@ -69,22 +69,22 @@ return {
 			local nodes = {}
 			local num_ins_nodes = 0
 
-			local num_args = tonumber(snip.captures[1])
-			if num_args ~= nil then
-				for j = 1, num_args do
-					table.insert(nodes, t("{"))
+			local num_opt_args = tonumber(snip.captures[1])
+			if num_opt_args ~= nil then
+				for j = 1, num_opt_args do
+					table.insert(nodes, t("["))
 					table.insert(nodes, i(j))
-					table.insert(nodes, t("}"))
+					table.insert(nodes, t("]"))
 					num_ins_nodes = j
 				end
 			end
 
-			local num_opt_args = tonumber(snip.captures[2])
-			if num_opt_args ~= nil then
-				for j = 1, num_opt_args do
-					table.insert(nodes, t("["))
+			local num_args = tonumber(snip.captures[2])
+			if num_args ~= nil then
+				for j = 1, num_args do
+					table.insert(nodes, t("{"))
 					table.insert(nodes, i(j + num_ins_nodes))
-					table.insert(nodes, t("]"))
+					table.insert(nodes, t("}"))
 				end
 			end
 
