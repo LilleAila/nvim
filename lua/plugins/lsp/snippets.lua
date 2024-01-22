@@ -35,7 +35,7 @@ return {
 
 	{
 		"chrisgrieser/nvim-scissors",
-		dependencies = "nvim-telescipe/telescope.nvim",
+		dependencies = "nvim-telescope/telescope.nvim",
 		config = function()
 			require("scissors").setup({
 				snippetDir = vim.fn.stdpath("config") .. "/snippets",
