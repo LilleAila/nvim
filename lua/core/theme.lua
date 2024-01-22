@@ -1,7 +1,9 @@
 -- Themery block
 -- This block will be replaced by Themery.
-vim.cmd("colorscheme dracula-soft")
-vim.g.theme_id = 10
+vim.o.background="dark"
+
+vim.cmd("colorscheme gruvbox")
+vim.g.theme_id = 23
 -- end themery block
 
 -- vim.cmd("hi NvimTreeLineNr guifg=white")
