@@ -40,7 +40,7 @@ return {
 						override_file_sorter = true,
 					},
 					file_browser = {
-						hijack_netrw = true,
+						hijack_netrw = false,
 					},
 					undo = {
 						use_delta = true,
