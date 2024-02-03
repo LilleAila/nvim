@@ -84,12 +84,12 @@ return {
 			[[\underset{<>}{<>}]],
 			{ i(1, "Under"), d(2, get_visual) }
 		), { condition = tex_utils.in_mathzone }),
-	s({ trig = "ss", descr = "Square root", wordTrig = false, snippetType="autosnippet" },
+	s({ trig = "ss", descr = "Square root", wordTrig = true, snippetType="autosnippet" },
 		fmta(
 			[[\sqrt{<>}]],
 			{ i(1) }
 		), { condition = tex_utils.in_mathzone }),
-	s({ trig = "rr", descr = "Nth root", wordTrig = false, snippetType="autosnippet" },
+	s({ trig = "rr", descr = "Nth root", wordTrig = true, snippetType="autosnippet" },
 		fmta(
 			[[\sqrt[<>]{<>}]],
 			{ i(1), i(2) }
