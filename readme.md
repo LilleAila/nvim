@@ -1,5 +1,8 @@
 # Neovim Config
 
+> [!WARNING]
+> I have switched to nixvim. My new config is [here](https://github.com/LilleAila/nvim-nix)
+
 ## Linux and MacOS:
 #### Backup old config
 ```bash
